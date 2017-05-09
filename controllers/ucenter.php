@@ -98,6 +98,59 @@ class Ucenter extends IController implements userAuthorization
         }
 	}
 
+    //[用户营业执照]上传
+    function user_paper_upload()
+    {
+        $result = array(
+            'isError' => true,
+        );
+
+        if(isset($_FILES['attach']['name']) && $_FILES['attach']['name'] != '')
+        {
+            $photoObj = new PhotoUpload();
+            $photo    = $photoObj->run();
+
+            if($photo['attach']['img'])
+            {
+                $user_id   = $this->user['user_id'];
+                $user_obj  = new IModel('company');
+                $dataArray = array(
+                    'paper_img' => JSON::encode(array('paper_img'=>$photo['attach']['img'])),
+                );
+                $user_obj->setData($dataArray);
+                $where  = 'user_id = '.$user_id;
+                $isSuss = $user_obj->update($where);
+
+                if($isSuss !== false)
+                {
+                    $result['isError'] = false;
+                    $result['data'] = IUrl::creatUrl().$photo['attach']['img'];
+                    //ISafe::set('head_ico',$dataArray['paper_img']);
+                }
+                else
+                {
+                    $result['message'] = '上传失败';
+                }
+            }
+            else
+            {
+                $result['message'] = '上传失败';
+            }
+        }
+        else
+        {
+            $result['message'] = '请选择图片';
+        }
+        if(IClient::getDevice() == IClient::PC)
+        {
+            echo '<script type="text/javascript">parent.callback_user_paper('.JSON::encode($result).');</script>';
+        }
+        else
+        {
+            $this->info_edit();
+        }
+    }
+
     /**
      * @brief 我的订单列表
      */
@@ -869,6 +922,8 @@ class Ucenter extends IController implements userAuthorization
             $userObj->update('id = '.$user_id);
         }         
         $type = $this->user['type'];
+
+
         if($type == 1 || $type == 4)
         {
             $memberObj = new IModel('member');

@@ -78,7 +78,9 @@
             <dt>logo：</dt>
             <dd>{set:$user_ico = $this->user['head_ico']}
                 <div class="user_ico">
-                    <img src="{webroot:$user_ico}" onerror="this.src='{skin:image/user_ico.gif}'">
+
+                    <img id="user_ico_img" src="{webroot:$user_ico}" onerror="this.src='{skin:image/user_ico.gif}'">
+                   <span onclick="select_ico()">修改头像</span>
                 </div>
             </dd>
         </dl>
@@ -87,7 +89,9 @@
             <dd>{set:$paper_img_url = JSON::decode($this->dataRow['paper_img'])}
                 {foreach:items=$paper_img_url}
                 <div class="user_ico">
-                    <img src="{webroot:$item}" onerror="this.src='{skin:image/user_ico.gif}'">
+
+                    <img src="{webroot:$item}" onerror="this.src='{skin:image/user_ico.gif}'" id="user_paper_img">
+                    <span onclick="select_paper()">修改证件</span>
                 </div>
                 {/foreach}
             </dd>
@@ -152,6 +156,21 @@ function select_ico()
 	});
 }
 
+//修改执照
+function select_paper(){
+    {set:$callback = urlencode(IUrl::creatUrl('/ucenter/user_paper_upload'))}
+    art.dialog.open('{url:/block/photo_upload?callback=$callback}',
+            {
+                'id':'user_ico',
+                'title':'设置执照',
+                'ok':function(iframeWin, topWin)
+                {
+                    iframeWin.document.forms[0].submit();
+                    return false;
+                }
+            });
+}
+
 //头像上传回调函数
 function callback_user_ico(content)
 {
@@ -165,6 +184,21 @@ function callback_user_ico(content)
 		$('#user_ico_img').prop('src',content.data);
 	}
 	art.dialog({id:'user_ico'}).close();
+}
+
+//头像上传回调函数
+function callback_user_paper(content)
+{
+    var content = eval(content);
+    if(content.isError == true)
+    {
+        alert(content.message);
+    }
+    else
+    {
+        $('#user_paper_img').prop('src',content.data);
+    }
+    art.dialog({id:'user_ico'}).close();
 }
 
 //表单回填

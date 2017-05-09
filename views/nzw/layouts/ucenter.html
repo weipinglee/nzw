@@ -210,6 +210,7 @@
 	</section>
 	<aside class="bar">
 		{set:$index=0;}
+		{if:$this->user['user_id']==1}
 		{foreach:items=menuUcenter::init($this->user['user_id'])}
 		{set:$index++;}
 		<nav class="user_bar">
@@ -221,6 +222,19 @@
 			</ul>
 		</nav>
 		{/foreach}
+		{else:}
+		{foreach:items=menuCompany::init($this->user['user_id'])}
+		{set:$index++;}
+		<nav class="user_bar">
+			<h3>{$key}</h3>
+			<ul>
+				{foreach:items=$item key=$moreKey item=$moreValue}
+				<li><a title="{$moreValue}" href="{url:$moreKey}">{$moreValue}</a></li>
+				{/foreach}
+			</ul>
+		</nav>
+		{/foreach}
+		{/if}
 	</aside>
 </section>
 
