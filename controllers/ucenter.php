@@ -1899,4 +1899,61 @@ class Ucenter extends IController implements userAuthorization
         }
         
     }
+
+    //预约装修
+    public function yuyue(){
+        $user_id = $this->user['user_id'];
+        $type = $this->user['type'];
+        if($type==1){
+            $data = array(
+                'user_id' => $user_id,
+                'company_id'=> IFilter::act(IReq::get('company_id','post'),'int'),
+                'name'=>IFilter::act(IReq::get('name','post')),
+                'phone'=>IFilter::act(IReq::get('phone','post')),
+                'address'=>IFilter::act(IReq::get('address','post')),
+                'square'=>IFilter::act(IReq::get('square','post'),'float'),
+                'time'=> ITime::getDateTime()
+            );
+
+            $M = new IModel('yuyue');
+            if($M->setData($data)->add()){
+                die(JSON::encode(array('success'=>1,'info'=>'预约成功，等待处理')));
+            }
+            else{
+                die(JSON::encode(array('success'=>0,'info'=>'预约失败，请重新处理')));
+            }
+
+
+
+        }
+        die(JSON::encode(array('success'=>0,'info'=>'您不能预约')));
+
+    }
+
+    //预约列表
+    public function yuyueList(){
+        $user_id = $this->user['user_id'];
+        $type = $this->user['type'];
+        $this->query = NULL;
+        if($type==1){
+            $page  = IReq::get('page') ? IFilter::act(IReq::get('page'),'int') : 1;
+            $M = new IQuery('yuyue as y');
+            $M->join = " left join company as c on y.company_id = c.user_id";
+            $M->fields = "y.*,c.contacts_name,c.true_name";
+            $M->page     = $page;
+            $M->where = "y.user_id = ".$user_id;
+            $this->query = $M;
+
+        }
+        else if($type==2){
+            $page  = IReq::get('page') ? IFilter::act(IReq::get('page'),'int') : 1;
+            $M = new IQuery('yuyue as y');
+            $M->join = " left join company as c on y.company_id = c.user_id";
+            $M->fields = "y.*,c.contacts_name,c.true_name";
+            $M->page     = $page;
+            $M->where = "c.user_id = ".$user_id;
+            $this->query = $M;
+        }
+        $this->redirect('yuyueList');
+    }
 }

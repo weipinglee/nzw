@@ -210,7 +210,7 @@
 	</section>
 	<aside class="bar">
 		{set:$index=0;}
-		{if:$this->user['user_id']==1}
+		{if:$this->user['type']==1}
 		{foreach:items=menuUcenter::init($this->user['user_id'])}
 		{set:$index++;}
 		<nav class="user_bar">
