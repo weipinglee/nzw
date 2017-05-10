@@ -1,11 +1,12 @@
 <?php
 /**
- * @copyright Copyright(c) 2010 aircheng.com
+ * @copyright Copyright(c) 2010 nainaiwang.com
  * @file iweb.php
  * @brief 引用内核入口文件
- * @author chendeshan
- * @date 2010-12-02
- * @version 1.4.1
+ * @author weipinglee
+ * @date 2017-5-10
+ * @version 1.4.2 更改autoload方法对类名的正则判断，允许通过命名空间访问类
+ *
  */
 //内核路径
 defined('IWEB_PATH') or define('IWEB_PATH',dirname(__file__).DIRECTORY_SEPARATOR);
@@ -59,7 +60,7 @@ class IWeb
 	 */
 	public static function autoload($className)
 	{
-		if(!preg_match('|^\w+$|',$className))
+		if(!preg_match('|^[\\\\?\w+]+$|',$className))
 		{
 			die('the class name is inaccurate');
 		}

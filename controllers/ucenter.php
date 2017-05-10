@@ -1956,4 +1956,41 @@ class Ucenter extends IController implements userAuthorization
         }
         $this->redirect('yuyueList');
     }
+
+    /**
+     * 预约详情
+     */
+
+    public function yuyue_detail(){
+        $id = IFilter::act(IReq::get('id'),'int');
+        $data = array();
+        if($id){
+            $user_id = $this->user['user_id'];
+            $type = $this->user['type'];
+            $M = new IQuery('yuyue as y');
+            $M->join = " left join company as c on y.company_id = c.user_id";
+            $M->fields = "y.*,c.contacts_name,c.true_name";
+            $M->limit = 1;
+            if($type==1){//业主类型
+                $M->where = "y.user_id = ".$user_id.' and y.id = '.$id;
+            }
+            elseif($type==2){//装修公司类型
+                $M->where = "y.company_id = ".$user_id.' and y.id = '.$id;
+            }
+            else{//
+                $M->where = 'y.id=0';
+            }
+            $data = $M->find();
+            if(!empty($data)){
+                $yuyueHandel = new yuyueHandle();
+                $yuyueHandel->setState($id);
+                $data[0]['statusText'] = $yuyueHandel->getStateText();
+                $this->detail = $data[0];
+            }
+
+
+        }
+        $this->redirect('yuyue_detail');
+
+    }
 }

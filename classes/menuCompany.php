@@ -34,6 +34,7 @@ class menuCompany
 		    "装修服务" => array(
 					"/company/case_list" => "装修案例",
 					"company/designer_list" => "设计师列表",
+					"/ucenter/yuyueList" => "我的预约",
 			),
 
 			"服务中心" => array(
@@ -52,11 +53,6 @@ class menuCompany
 
 
 
-
-			"配置模块" => array(
-				/*"/company/message_list" => "消息通知", */
-					"/company/company_edit" => "资料修改",
-			),
 
 	);
 
