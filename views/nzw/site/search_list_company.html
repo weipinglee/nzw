@@ -48,8 +48,9 @@
 			<div id="order">
 				<div class="order_head">预约装修</div>
 				<div style="padding:0 100px;">
-					<input type="text" placeholder="您的姓名" class="normal">
-					<input type="text" placeholder="电话号码" class="normal">
+					<form action="{url:/ucenter/yuyue}" method="post">
+					<input type="text" placeholder="您的姓名" class="normal" name="name">
+					<input type="text" placeholder="电话号码" class="normal" name="phone">
 					<div class="city">
 						<input type="button" class="city_select" value="省/市" id="city_select1">
 						<input type="hidden" name="type">
@@ -76,8 +77,9 @@
 							<li js_data="12">长治市</li>
 						</ul>
 					</div>
-					<input type="text" placeholder="房屋面积" class="normal"><span class="area">㎡</span>
-					<a href class="need_publish" id="mask_close">免费发布</a>
+					<input type="text" placeholder="房屋面积" class="normal" name="square"><span class="area">㎡</span>
+					<input type="button" name="button" class="need_publish" id="mask_close" value="免费发布">
+					</form>
 				</div>
 			</div>
 
