@@ -1982,8 +1982,9 @@ class Ucenter extends IController implements userAuthorization
             }
             $data = $M->find();
             if(!empty($data)){
-                $yuyueHandel = new yuyueHandle();
+                $yuyueHandel = new \yuyue\yuyueHandle();
                 $yuyueHandel->setState($id);
+                $data[0]['id'] = $id;
                 $data[0]['statusText'] = $yuyueHandel->getStateText();
                 $this->detail = $data[0];
             }
@@ -1991,6 +1992,33 @@ class Ucenter extends IController implements userAuthorization
 
         }
         $this->redirect('yuyue_detail');
+
+    }
+
+    public function yuyue_cancle(){
+        $id = IFilter::act(IReq::get('yuyueID','post'),'int');
+        if($id){
+            $handleObj = null;
+            if($this->user['type']==1){
+                $handleObj = new \yuyue\yuyueHandleUser($id,$this->user['user_id']);
+            }
+            elseif($this->user['type']==2){
+                $handleObj = new \yuyue\yuyueHandleCompany($id,$this->user['user_id']);
+            }
+            else{
+                die(JSON::encode(array('success'=>0,'info'=>'操作错误')));
+            }
+
+            if($handleObj->handleFail()){
+                die(JSON::encode(array('success'=>1,'info'=>'取消成功')));
+            }
+            else{
+                die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
+            }
+        }
+        else{
+            die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
+        }
 
     }
 }

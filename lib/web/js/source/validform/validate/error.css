@@ -1,7 +1,7 @@
 	input.error { border: 1px solid red; }
 	textarea.error { border: 1px solid red; }
 	label.error {
-	  background:url("{root:js/form/images/unchecked.gif}") no-repeat 0px 0px;
+	  background:url("images/unchecked.gif") no-repeat 0px 0px;
 
 	  padding-left: 16px;
 
@@ -12,5 +12,7 @@
 	  color: #EA5200;
 	}
 	label.checked {
-	  background:url("{root:js/form/images/checked.gif}") no-repeat 0px 0px;
+	  background:url("images/checked.gif") no-repeat 0px 0px;
 	}
+
+	.Validform_wrong{color:red;}

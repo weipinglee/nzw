@@ -24,7 +24,7 @@ class IJSPackage
 
 		'form' => array('js' => 'form/form.js'),
 
-		//自动验证表单和自动提交
+		//新增
 		'validform' => array(
 			'js' => array(
 				'validform/formacc.js',
@@ -32,11 +32,10 @@ class IJSPackage
 			),
 			'css'=> 'validform/validate/error.css'
 		),
-		//弹出层
 		'layer'    => array(
 			'js' => array(
 				'layer/layer.js',
-				'layer/extend/layer.ext.js'
+					'layer/extend/layer.ext.js'
 			)
 		),
 

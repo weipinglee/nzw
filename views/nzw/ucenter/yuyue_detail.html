@@ -1,3 +1,4 @@
+{set:$id = $this->detail['id']}
 {set:$detail = $this->detail}
 <header class="uc_head">
     <h3>预约详情</h3>
@@ -42,16 +43,24 @@
             <th>装修公司联系人：</th>
             <td>{$this->detail['contacts_name']}</td>
         </tr>
+        {else:}
+        <tr>
+            <th>操作</th>
+            <td>
+                <input type="button" class="goback_btn" name="cancle" value="取消" ">
+                <input type="button" class="goback_btn" name="create" value="创建订单" >
+            </td>
+        </tr>
         {/if}
 
     </table>
 </section>
-<section class="user_form none js_delivery_info">
+<section class="user_form  js_delivery_info">
     <form action="" method="post" name='delivery_info' auto_submit>
 
         <dl>
             <dt>快递公司：</dt>
-            <dd><input class="input_text" type="text" name="company" datatype="e"  value="" alt="请填写快递公司"><span></span></span></dd>
+            <dd><input class="input_text" type="text" name="company" datatype="e"  value="" alt="请填写快递公司"><span></span></dd>
         </dl>
         <dl>
             <dt>快递单号：</dt>
@@ -71,5 +80,45 @@
         </dl>
     </form>
 </section>
+<script type="text/javascript">
+    $(function(){
+        $('input[name=cancle]').on('click',function(){
+            var url = '{url:/ucenter/yuyue_cancle}';
+            var id = {$id};
+            layer.confirm(
+                    '确定要取消预约吗',
+                    function(flag){
+                        $.ajax({
+                            type: 'post',
+                            url: url,
+                            async: true,
+                            data: {yuyueID: id},
+                            dataType: 'json',
+                            success: function (data) {
+                                if (data.success == 1) {
+                                    window.location.reload();
+                                }
+                                else {
+                                    layer.closeAll();
+                                    alert(data.info);
+                                }
+
+                            },
+                            error: function (jqXHR) {
+
+                            },
+                            complate: function () {
+                                layer.closeAll();
+                            }
+                        })
+
+                    },
+                    function() {
+                        layer.closeAll();
+                    }
+            );
+        })
+    })
+</script>
 
 

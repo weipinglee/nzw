@@ -6,13 +6,13 @@
  * Time: 下午 3:43
  */
 
-namespace yuyue;
+namespace yuyue\state;
 
 
-class failYuyue extends yuyue
+class successYuyue extends \yuyue\yuyue
 {
     public function getStateText(){
-            return '预约失败';
+        return '预约成功';
 
     }
 

@@ -6,10 +6,10 @@
  * Time: 下午 3:43
  */
 
-namespace yuyue;
+namespace yuyue\state;
 
 
-class startYuyue extends yuyue
+class startYuyue extends \yuyue\yuyue
 {
 
 
@@ -17,8 +17,12 @@ class startYuyue extends yuyue
         return '线下洽谈中';
     }
 
-    public function handleFail(){
 
+    public function handleFail(){
+        if($this->setStatus(self::FAIL)){
+            return true;
+        }
+        return false;
     }
 
     public function handleSuccess()
