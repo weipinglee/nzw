@@ -24,6 +24,22 @@ class IJSPackage
 
 		'form' => array('js' => 'form/form.js'),
 
+		//自动验证表单和自动提交
+		'validform' => array(
+			'js' => array(
+				'validform/formacc.js',
+				'validform/validform.js',
+			),
+			'css'=> 'validform/validate/error.css'
+		),
+		//弹出层
+		'layer'    => array(
+			'js' => array(
+				'layer/layer.js',
+				'layer/extend/layer.ext.js'
+			)
+		),
+
 		'dialog' => array(
 			'js' => array(
 				'artdialog/artDialog.js',

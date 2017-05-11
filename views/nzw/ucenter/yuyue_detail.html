@@ -47,17 +47,15 @@
     </table>
 </section>
 <section class="user_form none js_delivery_info">
-    <form action="{url:/ucenter/refunds_update2}" method="post" name='delivery_info'>
-        <input type="hidden" name="id" value="{$this->data['id']}">
-        <input type="hidden" name="num" value="{$this->data['order_no']}">
-        <input type="hidden" name="type" value="{$this->data['type']}">
+    <form action="" method="post" name='delivery_info' auto_submit>
+
         <dl>
             <dt>快递公司：</dt>
-            <dd><input class="input_text" type="text" name="company" pattern="required" value="" alt="请填写快递公司"></dd>
+            <dd><input class="input_text" type="text" name="company" datatype="e"  value="" alt="请填写快递公司"><span></span></span></dd>
         </dl>
         <dl>
             <dt>快递单号：</dt>
-            <dd><input class="input_text" type="text" name="delivery_code" pattern="required" value="" alt="请填写快递单号"></dd>
+            <dd><input class="input_text" type="text" name="delivery_code"  value="" alt="请填写快递单号"></dd>
         </dl>
         <dl>
             <dt>退货地址：</dt>

@@ -3,6 +3,7 @@
 		$(".company_nav ul li a").eq(0).addClass("on");
 	})
 </script>
+
 <div class="company_backg">
 	<div class="company_main">
 		<div class="company_profile">
@@ -216,13 +217,16 @@
 			<div id="order">
 				<div class="order_head">预约装修</div>
 				<div style="padding:0 100px;">
+				<form method="post"  auto_submit>
 
-					<input type="text" name='name' placeholder="您的姓名" class="normal">
+
+					<input type="text" name='name' datatype="email" errormsg="123" placeholder="您的姓名" class="normal"><span>123</span>
 					<input type="text" name="phone" placeholder="电话号码" class="normal">
 					<input type="text" name="phone" placeholder="地址" class="normal">
 					<input type="text" name="square" placeholder="房屋面积" class="normal"><span class="area">㎡</span>
+					<input type="submit" name="tijiao"/>
 					<a href class="need_publish" id="mask_close">免费发布</a>
-
+				</form>
 				</div>
 			</div>
 <!-- 预约装修 end -->
