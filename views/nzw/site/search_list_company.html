@@ -48,9 +48,9 @@
 			<div id="order">
 				<div class="order_head">预约装修</div>
 				<div style="padding:0 100px;">
-					<form action="{url:/ucenter/yuyue}" method="post">
-					<input type="text" placeholder="您的姓名" class="normal" name="name">
-					<input type="text" placeholder="电话号码" class="normal" name="phone">
+					<form id="yuyue">
+					<input type="text" placeholder="您的姓名" class="normal" name="name" datatype="*" nullmsg="请输入姓名"><span></span>
+					<input type="text" placeholder="电话号码" class="normal" name="phone" datatype="m" nullmsg="请输入手机号" errormsg="请正确填写手机号"><span></span>
 					<div class="city">
 						<input type="button" class="city_select" value="省/市" id="city_select1">
 						<input type="hidden" name="type">
@@ -77,7 +77,7 @@
 							<li js_data="12">长治市</li>
 						</ul>
 					</div>
-					<input type="text" placeholder="房屋面积" class="normal" name="square"><span class="area">㎡</span>
+					<input type="text" placeholder="房屋面积" class="normal" name="square" datatype="n" nullmsg="请填写房屋面积"><span></span><span class="area">㎡</span>
 					<input type="button" name="button" class="need_publish" id="mask_close" value="免费发布">
 					</form>
 				</div>
@@ -85,7 +85,7 @@
 
 
 	<aside class="shop_bar">
-		<!--<nav class="bar_box bar_goods_nav">
+		<!-- <nav class="bar_box bar_goods_nav">
 			<h3 class="bar_box_head">预约装修</h3>
 			<p class="intro">施工报价全免费，轻松获取</p>
 			<input type="text" placeholder="您的姓名" class="normal">
@@ -118,9 +118,30 @@
 			</div>
 			<input type="text" placeholder="房屋面积" class="normal"><span class="area">㎡</span>
 			<a href class="need_publish">免费发布</a>
-		</nav>
+		</nav> -->
 		<script>
+
 			$(function(){
+				// 预约装修AJAX提交
+				var  myForm = $('#yuyue').submit(function() {
+				        $.ajax({
+				            url: '{url:/ucenter/yuyue}',
+				            type: 'post',//提交的方式
+				            dataType:'json'
+				            data: myForm.serializeArray(),
+				            success: function(msg) {
+				                console . log(res)
+					                if (res . type == '1') {
+					                  alert(res . info);
+					               } else {
+					                  if (res . type == "0") {
+					                       alert(res . info)
+					                       }
+					                   }
+					               }
+				            }
+				        });
+				    });
 				// 弹窗
 				$("#city_select1").click(function(){
 					if($("#city_list1").is(":hidden")){
@@ -245,7 +266,7 @@
 				})
 
 			});
-		</script>--> 
+		</script> 
         <div class="ad-pic">
             <img src="{url:views/nzw/skin/default/image/list/guanggao1.jpg}">
         </div>
