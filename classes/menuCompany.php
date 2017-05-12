@@ -35,6 +35,7 @@ class menuCompany
 					"/company/case_list" => "装修案例",
 					"company/designer_list" => "设计师列表",
 					"/ucenter/yuyueList" => "我的预约",
+					"/ucenter/project_list" => "装修项目"
 			),
 
 			"服务中心" => array(

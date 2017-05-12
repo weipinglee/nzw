@@ -38,4 +38,14 @@ namespace yuyue;
          }
          return array();
      }
-}
+
+     public function getProjectList($page=1)
+     {
+         $Q = new \IQuery('yuyue as y');
+         $Q->page = $page;
+         $Q->where = 'y.isproject=1 and y.company_id='.$this->operUserId;
+         $data = $Q->find();
+         $pageBar = $Q->getPageBar();
+         return array($data,$pageBar);
+     }
+ }

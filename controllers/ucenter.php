@@ -2031,4 +2031,67 @@ class Ucenter extends IController implements userAuthorization
         die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
 
     }
+
+    //装修项目列表
+    public function project_list(){
+        $handleObj = null;
+        $page = IFilter::act(IReq::get('page'),'int');
+        if(!$page)
+            $page = 1;
+        if($this->user['type']==2){
+            $handleObj = new \yuyue\yuyueHandleCompany(0,$this->user['user_id']);
+        }
+        elseif($this->user['type']==1){
+            $handleObj = new \yuyue\yuyueHandleUser(0,$this->user['user_id']);
+        }
+        $this->listData = $handleObj->getProjectList($page);
+        $this->statusArray = $handleObj->getStatusArray();
+        $this->redirect('project_list');
+    }
+
+    public function project_detail(){
+        $id = IFilter::act(IReq::get('id'),'int');
+        $this->detail = array();
+        if($id){
+            $user_id = $this->user['user_id'];
+            $type = $this->user['type'];
+            $stateObj = null;
+            if($type==1){//业主类型
+                $stateObj = new \yuyue\yuyueHandleUser($id,$user_id);
+            }
+            elseif($type==2){//装修公司类型
+                $stateObj = new \yuyue\yuyueHandleCompany($id,$user_id);
+            }
+
+            $this->detail = $stateObj->getDetail();
+
+
+        }
+        $this->redirect('project_detail');
+    }
+
+    public function project_nextstep(){
+        $id = IFilter::act(IReq::get('yuyueID','post'),'int');
+        if($id){
+            $handleObj = null;
+            if($this->user['type']==2){
+                $handleObj = new \yuyue\yuyueHandleCompany($id,$this->user['user_id']);
+            }
+            else{
+                die(JSON::encode(array('success'=>0,'info'=>'操作错误')));
+            }
+
+            if($handleObj->setnextStep()){
+                die(JSON::encode(array('success'=>1,'info'=>'取消成功')));
+            }
+            else{
+                die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
+            }
+        }
+        else{
+            die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
+        }
+    }
+
+
 }

@@ -1,0 +1,124 @@
+{set:$id = $this->detail['id']}
+{set:$detail = $this->detail}
+<header class="uc_head">
+    <h3>预约详情</h3>
+</header>
+<section class="col_table">
+    <table>
+
+        <tr>
+            <th>项目状态：</th>
+            <td>
+               {$detail['statusText']}
+            </td>
+        </tr>
+
+        <tr>
+            <th>业主姓名：</th>
+            <td>{$detail['name']}</td>
+        </tr>
+        <tr>
+        <th>业主电话：</th>
+        <td>{$detail['phone']}</td>
+    </tr>
+        <tr>
+            <th>业主地址：</th>
+            <td>{$detail['address']}</td>
+        </tr>
+        <tr>
+            <th>房屋面积：</th>
+            <td>{$detail['square']}</td>
+        </tr>
+        <tr>
+            <th>预约时间：</th>
+            <td>{$detail['time']}</td>
+        </tr>
+        <tr>
+            <th>所属小区：</th>
+            <td>{$detail['block']}</td>
+        </tr>
+        <tr>
+            <th>装修方案：</th>
+            <td>{$detail['plan']}</td>
+        </tr>
+        <tr>
+            <th>装修价格：</th>
+            <td>{$detail['price']}</td>
+        </tr>
+        <tr>
+            <th>成立时间：</th>
+            <td>{$detail['order_time']}</td>
+        </tr>
+        <tr>
+            <th>项目描述：</th>
+            <td>{$detail['description']}</td>
+        </tr>
+
+        {if:$this->user['type']==1}
+        <tr>
+            <th>装修公司：</th>
+            <td><a href="{url:/site/home/id/$this->data['seller_id']}" target="_blank">{$this->detail['true_name']}</a></td>
+        </tr>
+        <tr>
+            <th>装修公司联系人：</th>
+            <td>{$this->detail['contacts_name']}</td>
+        </tr>
+        {else:}
+        <tr>
+            <th>操作</th>
+            <td>
+                {if:$this->user['type']==2}
+                 <input type="button" class="goback_btn" name="oper" value="进入下一阶段" >
+                {/if}
+                <input type="button" class="goback_btn" value="返 回" onclick='event_link("{url:/ucenter/project_ist}")'>
+            </td>
+        </tr>
+        {/if}
+
+    </table>
+</section>
+
+<script type="text/javascript">
+    $(function(){
+        //取消按钮操作
+        $('input[name=oper]').on('click',function(){
+            var url = '{url:/ucenter/project_nextstep}';
+            var id = {$id};
+            layer.confirm(
+                    '确定要进入下一阶段吗',
+                    function(flag){
+                        $.ajax({
+                            type: 'post',
+                            url: url,
+                            async: true,
+                            data: {yuyueID: id},
+                            dataType: 'json',
+                            success: function (data) {
+                                if (data.success == 1) {
+                                    window.location.reload();
+                                }
+                                else {
+                                    layer.closeAll();
+                                    alert(data.info);
+                                }
+
+                            },
+                            error: function (jqXHR) {
+
+                            },
+                            complate: function () {
+                                layer.closeAll();
+                            }
+                        })
+
+                    },
+                    function() {
+                        layer.closeAll();
+                    }
+            );
+        })
+
+    })
+</script>
+
+

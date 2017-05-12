@@ -16,6 +16,12 @@ abstract class yuyue{
     const FAIL = 2;//预约失败
     const SUCCESS = 1; //预约成功,生成订单
 
+    const SHUIDIAN = 3;//水电阶段
+    const NIMU    = 4;//泥木阶段
+    const YOUQI   = 5;//油漆阶段
+    const JUNGONG = 6;//竣工阶段
+    const ZHONGYAN = 7;//终验合格
+
     protected $table = 'yuyue';//相关表
     protected $staField = 'status';//状态字段
     protected $operUserId = 0;//当前操作用户id
@@ -30,6 +36,20 @@ abstract class yuyue{
     {
         $this->yuyueId = $yuyue_id;
 
+    }
+
+    //获取状态数组
+    public function getStatusArray(){
+        return array(
+            0 => '预约中',
+            1 => '预约成功',
+            2 => '预约失败',
+            3 => '水电阶段',
+            4 => '泥木阶段',
+            5 => '油漆阶段',
+            6 => '竣工阶段',
+            7 => '终验结束',
+        );
     }
 
     /**
@@ -54,6 +74,12 @@ abstract class yuyue{
      * 确认要合作生成装修订单
      */
     abstract public function handleSuccess(array $update);
+
+    /**
+     * 设置进入下一阶段
+     * @return mixed
+     */
+    abstract public function setnextStep();
 
 
 }

@@ -24,4 +24,8 @@ class successYuyue extends \yuyue\yuyue
     {
 
     }
+    public function setnextStep()
+    {
+        return $this->setStatus(self::SHUIDIAN);
+    }
 }

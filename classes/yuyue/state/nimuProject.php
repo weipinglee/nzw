@@ -9,10 +9,10 @@
 namespace yuyue\state;
 
 
-class failYuyue extends \yuyue\yuyue
+class nimuProject extends \yuyue\yuyue
 {
     public function getStateText(){
-            return '预约失败';
+        return '泥木';
 
     }
 
@@ -27,6 +27,6 @@ class failYuyue extends \yuyue\yuyue
 
     public function setnextStep()
     {
-        // TODO: Implement setnextStep() method.
+        return $this->setStatus(self::YOUQI);
     }
 }

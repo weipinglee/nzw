@@ -40,6 +40,9 @@ abstract class yuyueHandle extends yuyue
     public function getDetail(){
 
     }
+
+    //获取装修项目列表
+    public function getProjectList($page=1){}
     /**
      *  设置获取当前状态的状态类
      * @param $id int 预约id
@@ -66,6 +69,27 @@ abstract class yuyueHandle extends yuyue
                     $state = new \yuyue\state\successYuyue($yuyueId);
                 }
                     break;
+                case self::SHUIDIAN : {
+                    $state = new \yuyue\state\shuidianProject($yuyueId);
+                }
+                    break;
+                case self::NIMU : {
+                    $state = new \yuyue\state\nimuProject($yuyueId);
+                }
+                    break;
+                case self::YOUQI : {
+                    $state = new \yuyue\state\youqiProject($yuyueId);
+                }
+                    break;
+                case self::JUNGONG : {
+                    $state = new \yuyue\state\jungongProject($yuyueId);
+                }
+                break;
+                case self::ZHONGYAN : {
+                    $state = new \yuyue\state\zhongyanProject($yuyueId);
+                }
+                break;
+
 
             }
         }
@@ -93,6 +117,14 @@ abstract class yuyueHandle extends yuyue
     public function handleSuccess(array $update){
         if($this->check()) {
             return $this->stateObj->handleSuccess($update);
+        }
+        return null;
+    }
+
+    public function setnextStep()
+    {
+        if($this->check()) {
+            return $this->stateObj->setnextStep();
         }
         return null;
     }

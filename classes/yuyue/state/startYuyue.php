@@ -30,6 +30,7 @@ class startYuyue extends \yuyue\yuyue
         $obj = new \IModel($this->table);
         if(!empty($update)){
             $update['status'] = self::SUCCESS;
+            $update['isproject'] = 1;
             $update['order_time'] = \ITime::getDateTime();
             $obj->setData($update);
             if($obj->update('id='.$this->yuyueId)){
@@ -38,5 +39,10 @@ class startYuyue extends \yuyue\yuyue
         }
         return false;
 
+    }
+
+    public function setnextStep()
+    {
+        // TODO: Implement setnextStep() method.
     }
 }
