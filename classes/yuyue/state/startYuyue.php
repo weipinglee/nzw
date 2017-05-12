@@ -25,8 +25,18 @@ class startYuyue extends \yuyue\yuyue
         return false;
     }
 
-    public function handleSuccess()
+    public function handleSuccess(array $update)
     {
+        $obj = new \IModel($this->table);
+        if(!empty($update)){
+            $update['status'] = self::SUCCESS;
+            $update['order_time'] = \ITime::getDateTime();
+            $obj->setData($update);
+            if($obj->update('id='.$this->yuyueId)){
+                return true;
+            }
+        }
+        return false;
 
     }
 }

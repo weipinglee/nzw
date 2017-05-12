@@ -14,7 +14,7 @@ abstract class yuyue{
 
     const INIT = 0;//预约初始
     const FAIL = 2;//预约失败
-    const SUCCESS = 1; //预约成功
+    const SUCCESS = 1; //预约成功,生成订单
 
     protected $table = 'yuyue';//相关表
     protected $staField = 'status';//状态字段
@@ -53,7 +53,7 @@ abstract class yuyue{
     /**
      * 确认要合作生成装修订单
      */
-    abstract public function handleSuccess();
+    abstract public function handleSuccess(array $update);
 
 
 }

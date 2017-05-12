@@ -9,9 +9,9 @@
  * @version 1.0
  */
 namespace yuyue;
-class yuyueHandle extends yuyue
+abstract class yuyueHandle extends yuyue
 {
-    private $stateObj = null;
+    protected $stateObj = null;
 
     /**
      * yuyueHandle constructor.
@@ -34,6 +34,10 @@ class yuyueHandle extends yuyue
      * @return bool
      */
     protected function check(){
+
+    }
+
+    public function getDetail(){
 
     }
     /**
@@ -86,9 +90,9 @@ class yuyueHandle extends yuyue
     }
 
     //成功处理
-    public function handleSuccess(){
+    public function handleSuccess(array $update){
         if($this->check()) {
-            return $this->stateObj->handleSuccess();
+            return $this->stateObj->handleSuccess($update);
         }
         return null;
     }

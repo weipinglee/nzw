@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2017/5/10 0010
- * Time: ÏÂÎç 3:43
+ * Time: ä¸‹åˆ 3:43
  */
 
 namespace yuyue\state;
@@ -12,7 +12,7 @@ namespace yuyue\state;
 class failYuyue extends \yuyue\yuyue
 {
     public function getStateText(){
-            return 'Ô¤Ô¼Ê§°Ü';
+            return 'é¢„çº¦å¤±è´¥';
 
     }
 
@@ -20,7 +20,7 @@ class failYuyue extends \yuyue\yuyue
 
     }
 
-    public function handleSuccess()
+    public function handleSuccess(array $update)
     {
 
     }

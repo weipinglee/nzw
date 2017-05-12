@@ -22,4 +22,20 @@ namespace yuyue;
          }
          return false;
      }
+
+     public function getDetail(){
+         $M = new \IQuery('yuyue as y');
+         $M->join = " left join company as c on y.company_id = c.user_id";
+         $M->fields = "y.*,c.contacts_name,c.true_name";
+         $M->limit = 1;
+         $M->where = "y.company_id = ".$this->operUserId.' and y.id = '.$this->yuyueId;
+         $data = $M->find();
+         if(!empty($data)){
+             $this->setState($this->yuyueId);
+             $data[0]['statusText'] = $this->stateObj->getStateText();
+             $data[0]['id'] = $this->yuyueId;
+             return $data[0];
+         }
+         return array();
+     }
 }

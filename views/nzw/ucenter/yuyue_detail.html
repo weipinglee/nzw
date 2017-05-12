@@ -47,32 +47,33 @@
         <tr>
             <th>操作</th>
             <td>
-                <input type="button" class="goback_btn" name="cancle" value="取消" ">
-                <input type="button" class="goback_btn" name="create" value="创建订单" >
+                {if:$this->detail['status']==0}<input type="button" class="goback_btn" name="cancle" value="取消" />
+                <input type="button" class="goback_btn" name="create" value="创建订单" >{/if}
+                <input type="button" class="goback_btn" value="返 回" onclick='event_link("{url:/ucenter/yuyueList}")'>
             </td>
         </tr>
         {/if}
 
     </table>
 </section>
-<section class="user_form  js_delivery_info">
-    <form action="" method="post" name='delivery_info' auto_submit>
-
+<section class="user_form none js_delivery_info">
+    <form action="{url:/ucenter/yuyue_succ}" method="post" name='yuyue_submit' auto_submit>
+        <input type="hidden" name="yuyueID" value="{$id}" />
         <dl>
-            <dt>快递公司：</dt>
-            <dd><input class="input_text" type="text" name="company" datatype="e"  value="" alt="请填写快递公司"><span></span></dd>
+            <dt>小区：</dt>
+            <dd><input class="input_text" type="text" name="block" datatype="*"  value="" ><span></span></dd>
         </dl>
         <dl>
-            <dt>快递单号：</dt>
-            <dd><input class="input_text" type="text" name="delivery_code"  value="" alt="请填写快递单号"></dd>
+            <dt>装修方案：</dt>
+            <dd><input class="input_text" type="text" name="plan" datatype="*" value="" alt=""><span></span></dd>
         </dl>
         <dl>
-            <dt>退货地址：</dt>
-            <dd><input class="input_text" type="text" name="address" pattern="required" value="" alt="请填写退货地址"></dd>
+            <dt>装修价格：</dt>
+            <dd><input class="input_text" type="text" name="price" datatype="money" value="" >元<span></span></dd>
         </dl>
         <dl>
             <dt>其他说明：</dt>
-            <dd><textarea class="input_textarea" name="info" alt="请填写退货说明"></textarea></dd>
+            <dd><textarea class="input_textarea" name="description" ></textarea></dd>
         </dl>
         <dl>
             <dt></dt>
@@ -82,6 +83,7 @@
 </section>
 <script type="text/javascript">
     $(function(){
+        //取消按钮操作
         $('input[name=cancle]').on('click',function(){
             var url = '{url:/ucenter/yuyue_cancle}';
             var id = {$id};
@@ -117,6 +119,10 @@
                         layer.closeAll();
                     }
             );
+        })
+        //显示创建订单表单
+        $('input[name=create]').on('click',function(){
+            $('.user_form').removeClass('none');
         })
     })
 </script>
