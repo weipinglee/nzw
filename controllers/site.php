@@ -1213,6 +1213,7 @@ class Site extends IController
 	 * 装修公司项目列表
 	 */
 	function company_project_list(){
+
 		$user_id = IFilter::act(IReq::get('id'),'int');
 		$page = IFilter::act(IReq::get('page'),'int');
 		if(!$page)$page = 1;
