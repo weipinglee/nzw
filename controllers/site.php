@@ -1208,6 +1208,22 @@ class Site extends IController
         $this->caseRow = $caseRow;
         $this->redirect('company_case_detail');
     }
+
+	/**
+	 * 装修公司项目列表
+	 */
+	function company_project_list(){
+		$user_id = IFilter::act(IReq::get('id'),'int');
+		$page = IFilter::act(IReq::get('page'),'int');
+		if(!$page)$page = 1;
+		$this->projectList = array();
+		if($user_id){
+			$obj = new \yuyue\yuyueHandleCompany(0,$user_id);
+			$this->projectList = $obj->getProjectList($page);
+		}
+		
+		$this->redirect('company_project_list');
+	}
       
     //设计师界面
     function design_index()
