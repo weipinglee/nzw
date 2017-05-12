@@ -1221,7 +1221,7 @@ class Site extends IController
 			$obj = new \yuyue\yuyueHandleCompany(0,$user_id);
 			$this->projectList = $obj->getProjectList($page);
 		}
-		
+
 		$this->redirect('company_project_list');
 	}
       
