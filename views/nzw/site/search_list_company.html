@@ -23,8 +23,8 @@
 						<em>案例：<span>{echo:statistics::caseCount($item['user_id'])}</span>套&nbsp;&nbsp;|&nbsp;&nbsp;设计师：<span>{echo:statistics::designerCount($item['user_id'])}</span>名&nbsp;&nbsp;|&nbsp;&nbsp;签单数：<span>0</span>单&nbsp;&nbsp;|&nbsp;&nbsp;咨询人数：<span>0</span>条</em>
 						<p>地址：{$item['address']}</p>
 						<!-- <del>￥{$item['market_price']}</del> -->
-						<a class="shop_list_btn1" href="javascript:;" onclick="alert('模块开发中，敬请期待。。。')">预约装修</a>
-						<!--<a href="" target="_blank" class="shop_list_btn2">免费报价</a>-->
+						<a class="shop_list_btn1 nav_icon" >预约装修</a>
+						<!-- <a href="" target="_blank" class="shop_list_btn2">免费报价</a> -->
 					</div>
 					<div class="shop_comment">
 						<p class="comments">评价数量</p>
@@ -44,41 +44,44 @@
 		</section>
 	</section>
 			<!-- 预约装修弹窗 -->
-			<div id="mask">&nbsp;</div>
+			<div id="mask" >&nbsp;</div>
 			<div id="order">
 				<div class="order_head">预约装修</div>
-				<div style="padding:0 100px;">
-					<form id="yuyue">
-					<input type="text" placeholder="您的姓名" class="normal" name="name" datatype="*" nullmsg="请输入姓名"><span></span>
-					<input type="text" placeholder="电话号码" class="normal" name="phone" datatype="m" nullmsg="请输入手机号" errormsg="请正确填写手机号"><span></span>
-					<div class="city">
-						<input type="button" class="city_select" value="省/市" id="city_select1">
-						<input type="hidden" name="type">
-						<ul style="display:none;" class="city_list" id="city_list1">
-							<li js_data="1">太原市</li>
-							<li js_data="2">阳泉市</li>
-						</ul>
-					</div>
-					<div class="county">
-						<input type="button" class="area_select" value="省/市" id="area_select1">
-						<input type="hidden" name="type">
-						<ul style="display:none;" class="area_list" id="area_list1">
-							<li js_data="1">太原市</li>
-							<li js_data="2">阳泉市</li>
-							<li js_data="3">大同市</li>
-							<li js_data="4">忻州市</li>
-							<li js_data="5">平遥市</li>
-							<li js_data="6">晋中市</li>
-							<li js_data="7">澳门市</li>
-							<li js_data="8">长治市</li>
-							<li js_data="9">平遥市</li>
-							<li js_data="10">晋中市</li>
-							<li js_data="11">澳门市</li>
-							<li js_data="12">长治市</li>
-						</ul>
-					</div>
-					<input type="text" placeholder="房屋面积" class="normal" name="square" datatype="n" nullmsg="请填写房屋面积"><span></span><span class="area">㎡</span>
-					<input type="button" name="button" class="need_publish" id="mask_close" value="免费发布">
+				<div style="padding-left:100px;">
+
+					<form method="post" id="yuyueForm" action="{url:/ucenter/yuyue}" auto_submit>
+						<input type="hidden" name="company_id" value="{$item['user_id']}">
+						<input type="text" name="name" datatype="*" errormsg="请输入业主姓名" nullmsg="请输入业主姓名" placeholder="您的姓名" class="normal"><span></span>
+						<input type="text" name="phone" placeholder="电话号码" class="normal" datatype="mobile" nullmsg="请输入手机号" errormsg="请正确填写手机号"><span></span>
+						<input type="text" name="address" placeholder="地址" class="normal" datatype="*" nullmsg="请输入房屋地址" errormsg="请输入房屋地址"><span></span>			
+						<!-- <div class="city">
+							<input type="button" class="city_select" value="省/市" id="city_select1">
+							<input type="hidden" name="type">
+							<ul style="display:none;" class="city_list" id="city_list1">
+								<li js_data="1">太原市</li>
+								<li js_data="2">阳泉市</li>
+							</ul>
+						</div>
+						<div class="county">
+							<input type="button" class="area_select" value="省/市" id="area_select1">
+							<input type="hidden" name="type">
+							<ul style="display:none;" class="area_list" id="area_list1">
+								<li js_data="1">太原市</li>
+								<li js_data="2">阳泉市</li>
+								<li js_data="3">大同市</li>
+								<li js_data="4">忻州市</li>
+								<li js_data="5">平遥市</li>
+								<li js_data="6">晋中市</li>
+								<li js_data="7">澳门市</li>
+								<li js_data="8">长治市</li>
+								<li js_data="9">平遥市</li>
+								<li js_data="10">晋中市</li>
+								<li js_data="11">澳门市</li>
+								<li js_data="12">长治市</li>
+							</ul>
+						</div> -->
+						<input type="text" name="square" placeholder="房屋面积" class="normal" datatype="n"nullmsg="请填写房屋面积"><span></span><span class="area">㎡</span>
+						<input type="submit" name="submit" class="need_publish" id="mask_close" value="免费发布">
 					</form>
 				</div>
 			</div>
@@ -120,28 +123,40 @@
 			<a href class="need_publish">免费发布</a>
 		</nav> -->
 		<script>
+			// 预约提交
+				$('#yuyueForm').on('submit', function (e){
+					e . preventDefault();
+						$.ajax( {
+							type : "POST",
+							dataType: "json",
+							url : '{url:/ucenter/yuyue}',
+							data : $(this) . serialize(),
+							success : function (res) {
+								console . log(res)
+								if (res . success == '1') {
+									alert(res . info);
+								} else {
+								if (res . success == "0") {
+									alert(res . info);
+								}
+							}
+						}
+					});
+				});
 
 			$(function(){
-				// 预约装修AJAX提交
-				var  myForm = $('#yuyue').submit(function() {
-				        $.ajax({
-				            url: '{url:/ucenter/yuyue}',
-				            type: 'post',//提交的方式
-				            dataType:'json'
-				            data: myForm.serializeArray(),
-				            success: function(msg) {
-				                console . log(res)
-					                if (res . type == '1') {
-					                  alert(res . info);
-					               } else {
-					                  if (res . type == "0") {
-					                       alert(res . info)
-					                       }
-					                   }
-					               }
-				            }
-				        });
-				    });
+
+				// 预约装修点击弹窗
+				$(".nav_icon").click(function(){
+					$("#order").show();
+					$("#order").css("top","20%");
+					$("#mask").show();
+				});
+				$("#mask").click(function(){
+					$("#order").hide();
+					$("#mask").hide();
+				});
+
 				// 弹窗
 				$("#city_select1").click(function(){
 					if($("#city_list1").is(":hidden")){
@@ -253,16 +268,6 @@
 						$('#area_list2').hide();
 						$("#area_select2").removeClass('down');
 					})
-				})
-
-				// 预约装修点击弹窗
-				$(".nav_icon").click(function(){
-					$("#order").show();
-					$("#mask").show();
-				})
-				$("#mask_close").click(function(){
-					$("#order").hide();
-					$("#mask").hide();
 				})
 
 			});

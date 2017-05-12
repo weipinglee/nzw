@@ -217,20 +217,42 @@
 			<div id="order">
 				<div class="order_head">预约装修</div>
 				<div style="padding:0 100px;">
-				<form method="post"  auto_submit>
+				
+				<form method="post" id="yuyueForm" action="{url:/ucenter/yuyue}" auto_submit>
 
 
-					<input type="text" name='name' datatype="email" errormsg="123" placeholder="您的姓名" class="normal"><span>123</span>
-					<input type="text" name="phone" placeholder="电话号码" class="normal">
-					<input type="text" name="phone" placeholder="地址" class="normal">
-					<input type="text" name="square" placeholder="房屋面积" class="normal"><span class="area">㎡</span>
-					<input type="submit" name="tijiao"/>
-					<a href class="need_publish" id="mask_close">免费发布</a>
+					<input type="text" name='name' datatype="*" errormsg="请输入业主姓名" nullmsg="请输入业主姓名" placeholder="您的姓名" class="normal"><span></span>
+					<input type="text" name="phone" placeholder="电话号码" class="normal" datatype="mobile"nullmsg="请输入手机号" errormsg="请正确填写手机号"><span></span>
+					<input type="text" name="address" placeholder="地址" class="normal" datatype="*"><span></span>
+					<input type="text" name="square" placeholder="房屋面积" class="normal" datatype="n"nullmsg="请填写房屋面积"><span></span><span class="area">㎡</span>
+					
+					<input type="submit" name="submit" class="need_publish" id="mask_close" value="免费发布">
 				</form>
 				</div>
 			</div>
 <!-- 预约装修 end -->
 <script type="text/javascript">
+				// 预约提交
+				$('#yuyueForm').on('submit', function (e){
+					e . preventDefault();
+						$.ajax( {
+							type : "POST",
+							dataType: "json",
+							url : '{url:/ucenter/yuyue}',
+							data : $(this) . serialize(),
+							success : function (res) {
+								console . log(res)
+								if (res . success == '1') {
+									alert(res . info);
+								} else {
+								if (res . success == "0") {
+									alert(res . info);
+								}
+							}
+						}
+					});
+				});
+
 $(function(){
 	// 预约装修点击弹窗
 				$(".nav_icon").click(function(){
