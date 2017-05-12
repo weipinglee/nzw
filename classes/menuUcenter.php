@@ -35,6 +35,7 @@ class menuUcenter
             "/ucenter/refunds" => "退款申请",
 			"/ucenter/changeRefunds" => "换货申请",
 			"/ucenter/yuyueList" => "我的预约",
+			"/ucenter/project_list"=> "装修项目",
 			// "/ucenter/complain" => "站点建议",
 			/*"/ucenter/consult" => "商品咨询",*/
 			"/ucenter/evaluation" => "商品评价",

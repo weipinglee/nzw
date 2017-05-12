@@ -7,7 +7,7 @@
     <table>
 
         <tr>
-            <th>预约状态：</th>
+            <th>项目状态：</th>
             <td>
                {$detail['statusText']}
             </td>
@@ -18,9 +18,9 @@
             <td>{$detail['name']}</td>
         </tr>
         <tr>
-            <th>业主电话：</th>
-            <td>{$detail['phone']}</td>
-        </tr>
+        <th>业主电话：</th>
+        <td>{$detail['phone']}</td>
+    </tr>
         <tr>
             <th>业主地址：</th>
             <td>{$detail['address']}</td>
@@ -32,6 +32,26 @@
         <tr>
             <th>预约时间：</th>
             <td>{$detail['time']}</td>
+        </tr>
+        <tr>
+            <th>所属小区：</th>
+            <td>{$detail['block']}</td>
+        </tr>
+        <tr>
+            <th>装修方案：</th>
+            <td>{$detail['plan']}</td>
+        </tr>
+        <tr>
+            <th>装修价格：</th>
+            <td>{$detail['price']}</td>
+        </tr>
+        <tr>
+            <th>成立时间：</th>
+            <td>{$detail['order_time']}</td>
+        </tr>
+        <tr>
+            <th>项目描述：</th>
+            <td>{$detail['description']}</td>
         </tr>
 
         {if:$this->user['type']==1}
@@ -47,48 +67,25 @@
         <tr>
             <th>操作</th>
             <td>
-                {if:$this->detail['status']==0}<input type="button" class="goback_btn" name="cancle" value="取消" />
-                <input type="button" class="goback_btn" name="create" value="创建订单" >{/if}
-                <input type="button" class="goback_btn" value="返 回" onclick='event_link("{url:/ucenter/yuyueList}")'>
+                {if:$this->user['type']==2}
+                 <input type="button" class="goback_btn" name="oper" value="进入下一阶段" >
+                {/if}
+                <input type="button" class="goback_btn" value="返 回" onclick='event_link("{url:/ucenter/project_ist}")'>
             </td>
         </tr>
         {/if}
 
     </table>
 </section>
-<section class="user_form none js_delivery_info">
-    <form action="{url:/ucenter/yuyue_succ}" method="post" name='yuyue_submit' auto_submit>
-        <input type="hidden" name="yuyueID" value="{$id}" />
-        <dl>
-            <dt>小区：</dt>
-            <dd><input class="input_text" type="text" name="block" datatype="*"  value="" ><span></span></dd>
-        </dl>
-        <dl>
-            <dt>装修方案：</dt>
-            <dd><input class="input_text" type="text" name="plan" datatype="*" value="" alt=""><span></span></dd>
-        </dl>
-        <dl>
-            <dt>装修价格：</dt>
-            <dd><input class="input_text" type="text" name="price" datatype="money" value="" >元<span></span></dd>
-        </dl>
-        <dl>
-            <dt>其他说明：</dt>
-            <dd><textarea class="input_textarea" name="description" ></textarea></dd>
-        </dl>
-        <dl>
-            <dt></dt>
-            <dd><input class="input_submit" type="submit" value="提交申请" /></dd>
-        </dl>
-    </form>
-</section>
+
 <script type="text/javascript">
     $(function(){
         //取消按钮操作
-        $('input[name=cancle]').on('click',function(){
-            var url = '{url:/ucenter/yuyue_cancle}';
+        $('input[name=oper]').on('click',function(){
+            var url = '{url:/ucenter/project_nextstep}';
             var id = {$id};
             layer.confirm(
-                    '确定要取消预约吗',
+                    '确定要进入下一阶段吗',
                     function(flag){
                         $.ajax({
                             type: 'post',
@@ -120,10 +117,7 @@
                     }
             );
         })
-        //显示创建订单表单
-        $('input[name=create]').on('click',function(){
-            $('.user_form').removeClass('none');
-        })
+
     })
 </script>
 

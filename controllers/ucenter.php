@@ -1963,34 +1963,135 @@ class Ucenter extends IController implements userAuthorization
 
     public function yuyue_detail(){
         $id = IFilter::act(IReq::get('id'),'int');
-        $data = array();
+        $this->detail = array();
         if($id){
             $user_id = $this->user['user_id'];
             $type = $this->user['type'];
-            $M = new IQuery('yuyue as y');
-            $M->join = " left join company as c on y.company_id = c.user_id";
-            $M->fields = "y.*,c.contacts_name,c.true_name";
-            $M->limit = 1;
+            $stateObj = null;
             if($type==1){//业主类型
-                $M->where = "y.user_id = ".$user_id.' and y.id = '.$id;
+               $stateObj = new \yuyue\yuyueHandleUser($id,$user_id);
             }
             elseif($type==2){//装修公司类型
-                $M->where = "y.company_id = ".$user_id.' and y.id = '.$id;
+                $stateObj = new \yuyue\yuyueHandleCompany($id,$user_id);
             }
-            else{//
-                $M->where = 'y.id=0';
-            }
-            $data = $M->find();
-            if(!empty($data)){
-                $yuyueHandel = new yuyueHandle();
-                $yuyueHandel->setState($id);
-                $data[0]['statusText'] = $yuyueHandel->getStateText();
-                $this->detail = $data[0];
-            }
+
+            $this->detail = $stateObj->getDetail();
 
 
         }
         $this->redirect('yuyue_detail');
 
     }
+
+    //取消预约的操作
+    public function yuyue_cancle(){
+        $id = IFilter::act(IReq::get('yuyueID','post'),'int');
+        if($id){
+            $handleObj = null;
+            if($this->user['type']==1){
+                $handleObj = new \yuyue\yuyueHandleUser($id,$this->user['user_id']);
+            }
+            elseif($this->user['type']==2){
+                $handleObj = new \yuyue\yuyueHandleCompany($id,$this->user['user_id']);
+            }
+            else{
+                die(JSON::encode(array('success'=>0,'info'=>'操作错误')));
+            }
+
+            if($handleObj->handleFail()){
+                die(JSON::encode(array('success'=>1,'info'=>'取消成功')));
+            }
+            else{
+                die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
+            }
+        }
+        else{
+            die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
+        }
+
+    }
+
+    //预约成功生成订单的操作
+    public function yuyue_succ(){
+        $update = array(
+            'block'=> IFilter::act(IReq::get('block','post')),
+            'plan' => IFilter::act(IReq::get('plan','post')),
+            'price'=> IFilter::act(IReq::get('price','post')),
+            'description'=> IFilter::act(IReq::get('description','post'))
+        );
+
+        $yuyu_id = IFilter::act(IReq::get('yuyueID','post'),'int');
+        if($this->user['type']==2){
+            $handleObj = new \yuyue\yuyueHandleCompany($yuyu_id,$this->user['user_id']);
+            $res = $handleObj->HandleSuccess($update);
+            if($res){
+                die(JSON::encode(array('success'=>1,'info'=>'操作成功')));
+            }
+        }
+        die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
+
+    }
+
+    //装修项目列表
+    public function project_list(){
+        $handleObj = null;
+        $page = IFilter::act(IReq::get('page'),'int');
+        if(!$page)
+            $page = 1;
+        if($this->user['type']==2){
+            $handleObj = new \yuyue\yuyueHandleCompany(0,$this->user['user_id']);
+        }
+        elseif($this->user['type']==1){
+            $handleObj = new \yuyue\yuyueHandleUser(0,$this->user['user_id']);
+        }
+        $this->listData = $handleObj->getProjectList($page);
+        $this->statusArray = $handleObj->getStatusArray();
+        $this->redirect('project_list');
+    }
+
+    public function project_detail(){
+        $id = IFilter::act(IReq::get('id'),'int');
+        $this->detail = array();
+        if($id){
+            $user_id = $this->user['user_id'];
+            $type = $this->user['type'];
+            $stateObj = null;
+            if($type==1){//业主类型
+                $stateObj = new \yuyue\yuyueHandleUser($id,$user_id);
+            }
+            elseif($type==2){//装修公司类型
+                $stateObj = new \yuyue\yuyueHandleCompany($id,$user_id);
+            }
+
+            $this->detail = $stateObj->getDetail();
+
+
+        }
+        $this->redirect('project_detail');
+    }
+
+    public function project_nextstep(){
+        $id = IFilter::act(IReq::get('yuyueID','post'),'int');
+        if($id){
+            $handleObj = null;
+            if($this->user['type']==2){
+                $handleObj = new \yuyue\yuyueHandleCompany($id,$this->user['user_id']);
+            }
+            else{
+                die(JSON::encode(array('success'=>0,'info'=>'操作错误')));
+            }
+
+            if($handleObj->setnextStep()){
+                die(JSON::encode(array('success'=>1,'info'=>'取消成功')));
+            }
+            else{
+                die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
+            }
+        }
+        else{
+            die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
+        }
+    }
+
+
 }

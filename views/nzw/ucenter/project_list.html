@@ -1,0 +1,32 @@
+
+<header class="uc_head">
+	<h3>我的项目</h3>
+</header>
+<section class="uc_table">
+	<table>
+		<thead>
+			<tr>
+				<th>姓名</th><th>联系方式</th><th>面积</th><th>地址</th><th>装修方案</th><th>成立时间</th><th>状态</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		 {foreach:items = $this->listData[0] }
+		<tr>
+			<td>{$item['name']}</td>
+			<td>{$item['phone']}</td>
+			<td>{$item['square']}</td>
+			<td>{$item['address']}</td>
+			<td>{$item['plan']}</td>
+			<td>{$item['order_time']}</td>
+			<td>
+
+				<b class="orange">{$this->statusArray[$item['status']]}</b>
+			</td>
+			<td><a href="{url:/ucenter/project_detail/id/$item['id']}">查看</a></td>
+		</tr>
+		{/foreach}
+		</tbody>
+	</table>
+</section>
+{$this->listData[1]}
