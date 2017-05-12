@@ -27,6 +27,6 @@ class zhongyanProject extends \yuyue\yuyue
 
     public function setnextStep()
     {
-        return $this->setStatus(self::JUNGONG);
+        return false;
     }
 }

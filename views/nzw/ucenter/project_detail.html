@@ -67,7 +67,7 @@
         <tr>
             <th>操作</th>
             <td>
-                {if:$this->user['type']==2}
+                {if:$this->user['type']==2 && $detail['status']<70}
                  <input type="button" class="goback_btn" name="oper" value="进入下一阶段" >
                 {/if}
                 <input type="button" class="goback_btn" value="返 回" onclick='event_link("{url:/ucenter/project_ist}")'>

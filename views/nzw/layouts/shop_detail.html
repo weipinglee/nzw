@@ -141,6 +141,54 @@
             </div>
         </div>
     </div>
+    <!-- 预约装修弹窗 -->
+    <div id="mask">&nbsp;</div>
+    <div id="order">
+        <div class="order_head">预约装修</div>
+        <div style="padding:0 100px;">
+
+            <form method="post" id="yuyueForm" action="{url:/ucenter/yuyue}" auto_submit>
+
+                <input type="hidden" name="company_id" value="{$_GET['id']}" />
+                <input type="text" name='name' datatype="*" errormsg="请输入业主姓名" nullmsg="请输入业主姓名" placeholder="您的姓名" class="normal"><span></span>
+                <input type="text" name="phone" placeholder="电话号码" class="normal" datatype="mobile"nullmsg="请输入手机号" errormsg="请正确填写手机号"><span></span>
+                <input type="text" name="address" placeholder="地址" class="normal" datatype="*"><span></span>
+                <input type="text" name="square" placeholder="房屋面积" class="normal" datatype="n"nullmsg="请填写房屋面积"><span></span><span class="area">㎡</span>
+
+                <input type="submit" name="submit" class="need_publish" id="mask_close" value="免费发布">
+            </form>
+        </div>
+    </div>
+    <!-- 预约装修 end -->
+    <script type="text/javascript">
+
+
+        $(function(){
+            // 预约装修点击弹窗
+            $(".nav_icon").click(function(){
+                $("#order").show();
+                $("#order").css("top","20%");
+                $("#mask").show();
+            });
+            $("#mask").click(function(){
+                $("#order").hide();
+                $("#mask").hide();
+            });
+
+            // 切换星星
+            $(".star_box .review_uls ").on('click', 'li', function(){
+                var t = $(this),i = t.index()+1;
+                $(this).parent(".review_uls").find("li").each(function(index){
+                    if (index<i) {
+                        $(this).addClass('on');
+                    }else{
+                        $(this).removeClass('on');
+                    }
+                });
+            });
+
+        })
+     </script>
 </body>
 </html>
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260508109'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1260508109%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>

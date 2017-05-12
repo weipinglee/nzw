@@ -1213,17 +1213,29 @@ class Site extends IController
 	 * 装修公司项目列表
 	 */
 	function company_project_list(){
+		$this->layout = 'shop_detail';
+		$id = IFilter::act(IReq::get('id'),'int');
 
-		$user_id = IFilter::act(IReq::get('id'),'int');
 		$page = IFilter::act(IReq::get('page'),'int');
 		if(!$page)$page = 1;
 		$this->projectList = array();
-		if($user_id){
-			$obj = new \yuyue\yuyueHandleCompany(0,$user_id);
+		if($id){
+			$obj = new \yuyue\yuyueHandleCompany(0,$id);
 			$this->projectList = $obj->getProjectList($page);
 		}
 
+
+		$db = new IModel('user as u,company as c');
+		$dataRow = $db->getObj('u.id = c.user_id and c.is_del = 0 and c.is_lock = 0 and u.id = '.$id, 'u.head_ico,c.user_id,c.true_name,c.address');
+		if(!$dataRow)
+		{
+		             IError::show('参数错误','403');
+		             return;
+		}
+		$this->setRenderData($dataRow);
+				
 		$this->redirect('company_project_list');
+
 	}
       
     //设计师界面

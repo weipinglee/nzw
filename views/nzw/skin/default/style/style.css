@@ -2522,8 +2522,8 @@ section.count_down{margin: 13px 5px;}
 #order .city input.city_select,#order .county input.area_select{outline: none;height: 34px;padding: 0 5px 0 10px;border: 0;color: #999;width: 110px;background: url("../image/list/up.png") no-repeat 106px center #fff;appearance: none;-moz-appearance: none;-webkit-appearance: none;border: 1px solid #ccc;text-align: left;}
 #order .city .city_list,#order .county .area_list{width: 125px;margin: 0 auto;border: 1px solid #ccc;border-top: none;display: none;overflow: auto;height: 160px;position: absolute;left:0;top: 35px;text-align: center;background: #fff;z-index: 2;}
 #order .city .city_list li,#order .county .area_list li{padding: 0 0 0 15px;color: #999;background: #FFF;width: 102px;height: 20px;line-height: 20px;clear: both;text-align: left;}
-#order .area{position: absolute; right: 105px; bottom: 117px; color: #ccc;}
-#order .need_publish{width: 260px;height: 45px;background: #e75d19;border-radius: 5px; color: #fff;text-align: center;line-height: 45px;font-size: 16px;border: 0;margin: 10px auto;display: block;text-decoration: none;}
+#order .area{position: absolute; right: 105px; bottom: 110px; color: #ccc;}
+#order .need_publish{width: 260px;height: 45px;background: #e75d19;border-radius: 5px; color: #fff;text-align: center;line-height: 45px;font-size: 16px;border: 0;margin-top: 10px;display: block;text-decoration: none;}
 
 /*bbs css*/
 .bbs_right .bbs_fs_an{

@@ -212,50 +212,8 @@
 		</div>-->
 	</div>
 </div>
-<!-- 预约装修弹窗 -->
-			<div id="mask">&nbsp;</div>
-			<div id="order">
-				<div class="order_head">预约装修</div>
-				<div style="padding:0 100px;">
-				<form method="post"  auto_submit>
 
-
-					<input type="text" name='name' datatype="email" errormsg="123" placeholder="您的姓名" class="normal"><span>123</span>
-					<input type="text" name="phone" placeholder="电话号码" class="normal">
-					<input type="text" name="phone" placeholder="地址" class="normal">
-					<input type="text" name="square" placeholder="房屋面积" class="normal"><span class="area">㎡</span>
-					<input type="submit" name="tijiao"/>
-					<a href class="need_publish" id="mask_close">免费发布</a>
-				</form>
-				</div>
-			</div>
-<!-- 预约装修 end -->
 <script type="text/javascript">
-$(function(){
-	// 预约装修点击弹窗
-				$(".nav_icon").click(function(){
-					$("#order").show();
-					$("#order").css("top","20%");
-					$("#mask").show();
-				});
-				$("#mask").click(function(){
-					$("#order").hide();
-					$("#mask").hide();
-				});
-
-	// 切换星星
-	$(".star_box .review_uls ").on('click', 'li', function(){
-		var t = $(this),i = t.index()+1;
-		$(this).parent(".review_uls").find("li").each(function(index){
-			if (index<i) {
-				$(this).addClass('on');
-			}else{
-				$(this).removeClass('on');
-			}
-		});
-	});
-
-})
  function filechange(obj) {
         if (obj.files && obj.files.length) {
             for (var i = 0; i < obj.files.length; i++) {

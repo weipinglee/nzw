@@ -1916,7 +1916,8 @@ class Ucenter extends IController implements userAuthorization
             );
 
             $M = new IModel('yuyue');
-            if($M->setData($data)->add()){
+            $M->setData($data);
+            if($M->add()){
                 die(JSON::encode(array('success'=>1,'info'=>'预约成功，等待处理')));
             }
             else{

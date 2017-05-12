@@ -217,6 +217,9 @@ class _authorization extends pluginBase
 		$userRow= self::getUser();
 		if(!$userRow)
 		{
+			if(IS_AJAX){
+				die(JSON::encode(Api::getSuccInfo(0,'请先登录再操作',IUrl::creatUrl('/simple/login'))));
+			}
 			$object->redirect('/simple/login');
 			exit;
 		}

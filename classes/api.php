@@ -170,4 +170,17 @@ class Api
 	{
 		IError::show(403,"API of ".$apiName." is called error , ".$message);
 	}
+
+	/**
+	 * 输出操作结果数据
+	 * @param int $res 1 ：成功 0：失败
+	 * @param string $info 提示信息
+	 * @param string $url 跳转地址
+	 * @param string $id
+	 * @return array
+	 */
+	public static function getSuccInfo($res=1,$info='',$url='',$id=''){
+		return array('success'=>$res,'info'=>$info,'returnUrl'=>$url,'id'=>$id);
+	}
+
 }
