@@ -1223,17 +1223,17 @@ class Site extends IController
 			$this->projectList = $obj->getProjectList($page);
 		}
 
-		   $db = new IModel('user as u,company as c');
-        $dataRow = $db->getObj('u.id = c.user_id and c.is_del = 0 and c.is_lock = 0 and u.id = '.$id, 'u.head_ico,c.user_id,c.true_name,c.address');
-        if(!$dataRow)
-        {
-             IError::show('参数错误','403');
-             return;
-        }
-        $this->setRenderData($dataRow);
-		
-		$this->redirect('company_project_list');
-	}
+		$db = new IModel('user as u,company as c');
+		$dataRow = $db->getObj('u.id = c.user_id and c.is_del = 0 and c.is_lock = 0 and u.id = '.$id, 'u.head_ico,c.user_id,c.true_name,c.address');
+		if(!$dataRow)
+		{
+		             IError::show('参数错误','403');
+		             return;
+		}
+		$this->setRenderData($dataRow);
+				
+			$this->redirect('company_project_list');
+		}
       
     //设计师界面
     function design_index()
