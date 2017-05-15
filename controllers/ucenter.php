@@ -1912,7 +1912,8 @@ class Ucenter extends IController implements userAuthorization
                 'phone'=>IFilter::act(IReq::get('phone','post')),
                 'address'=>IFilter::act(IReq::get('address','post')),
                 'square'=>IFilter::act(IReq::get('square','post'),'float'),
-                'time'=> ITime::getDateTime()
+                'time'=> ITime::getDateTime(),
+
             );
 
             $M = new IModel('yuyue');
@@ -2018,7 +2019,9 @@ class Ucenter extends IController implements userAuthorization
             'block'=> IFilter::act(IReq::get('block','post')),
             'plan' => IFilter::act(IReq::get('plan','post')),
             'price'=> IFilter::act(IReq::get('price','post')),
-            'description'=> IFilter::act(IReq::get('description','post'))
+            'description'=> IFilter::act(IReq::get('description','post')),
+            'proname' => IFilter::act(IReq::get('proname','post')),
+            'style' => IFilter::act(IReq::get('style','post'))
         );
 
         $yuyu_id = IFilter::act(IReq::get('yuyueID','post'),'int');
