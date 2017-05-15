@@ -1215,13 +1215,16 @@ class Site extends IController
 	function company_project_list(){
 		$this->layout = 'shop_detail';
 		$id = IFilter::act(IReq::get('id'),'int');
-
 		$page = IFilter::act(IReq::get('page'),'int');
 		if(!$page)$page = 1;
+
+		$type=IFilter::act(IReq::get('type','get'));
+		if(!$type)
+			$type='all';
 		$this->projectList = array();
 		if($id){
 			$obj = new \yuyue\yuyueHandleCompany(0,$id);
-			$this->projectList = $obj->getProjectList($page);
+			$this->projectList = $obj->getProjectList($page,$type);
 		}
 
 

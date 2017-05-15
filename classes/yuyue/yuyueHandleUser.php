@@ -40,7 +40,7 @@ namespace yuyue;
          return array();
      }
 
-     public function getProjectList($page=1)
+     public function getProjectList($page=1,$type='all')
      {
          $Q = new \IQuery('yuyue as y');
          $Q->join = "left join company as c on y.company_id = c.user_id";

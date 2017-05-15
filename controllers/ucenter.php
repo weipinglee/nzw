@@ -2024,15 +2024,30 @@ class Ucenter extends IController implements userAuthorization
             'style' => IFilter::act(IReq::get('style','post'))
         );
 
+        if(isset($_FILES['propic']['name']) && $_FILES['propic']['name'] != '')
+        {
+            $photoObj = new PhotoUpload();
+            $photo    = $photoObj->run();
+
+            if($photo['propic']['img'])
+            {
+               $update['img'] = $photo['propic']['img'];
+            }
+
+        }
+
+
         $yuyu_id = IFilter::act(IReq::get('yuyueID','post'),'int');
         if($this->user['type']==2){
             $handleObj = new \yuyue\yuyueHandleCompany($yuyu_id,$this->user['user_id']);
             $res = $handleObj->HandleSuccess($update);
             if($res){
-                die(JSON::encode(array('success'=>1,'info'=>'操作成功')));
+               // die(JSON::encode(array('success'=>1,'info'=>'操作成功')));
+                $this->redirect('/ucenter/project_detail/id/'.$yuyu_id);
             }
         }
-        die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
+        $this->redirect('/ucenter/project_detail/id/'.$yuyu_id);
+       // die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
 
     }
 
@@ -2096,6 +2111,8 @@ class Ucenter extends IController implements userAuthorization
             die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
         }
     }
+
+
 
 
 }

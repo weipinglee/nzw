@@ -1,5 +1,6 @@
 {set:$id = $this->detail['id']}
 {set:$detail = $this->detail}
+{js:ajaxupload}
 <header class="uc_head">
     <h3>预约详情</h3>
 </header>
@@ -57,8 +58,9 @@
     </table>
 </section>
 <section class="user_form none js_delivery_info">
-    <form action="{url:/ucenter/yuyue_succ}" method="post" name='yuyue_submit' auto_submit>
+    <form action="{url:/ucenter/yuyue_succ}" method="post" name='yuyue_submit'  enctype="multipart/form-data">
         <input type="hidden" name="yuyueID" value="{$id}" />
+        <input type="hidden" name="upload" value="{url:/ucenter/upload}" />
         <dl>
             <dt>项目名称：</dt>
             <dd><input class="input_text" type="text" name="proname" datatype="*"  value="" ><span></span></dd>
@@ -82,6 +84,12 @@
         <dl>
             <dt>其他说明：</dt>
             <dd><textarea class="input_textarea" name="description" ></textarea></dd>
+        </dl>
+        <dl>
+            <dt>上传图片：</dt>
+            <dd>
+                <input type="file" name="propic"/>
+            </dd>
         </dl>
         <dl>
             <dt></dt>
