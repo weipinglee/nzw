@@ -1132,7 +1132,22 @@ class Site extends IController
     function dec_company_pj()
     {
             $this->layout = 'shop_detail';
-            $this->redirect('dec_company_pj');
+        	$id = IReq::get('id');
+        if(!$id)
+        {
+            IError::show('参数错误','403');
+            return;
+        }
+        $db = new IModel('user as u,company as c');
+        $dataRow = $db->getObj('u.id = c.user_id and c.is_del = 0 and c.is_lock = 0 and u.id = '.$id, 'u.head_ico,c.user_id,c.true_name,c.desc,c.address,c.paper_img,c.phone');
+        if(!$dataRow)
+        {
+             IError::show('参数错误','403');
+             return;
+        }
+        $dataRow['desc'] = htmlspecialchars_decode($dataRow['desc']);
+        $this->setRenderData($dataRow);
+         $this->redirect('dec_company_pj');
      }
     function company_designer()
     {
