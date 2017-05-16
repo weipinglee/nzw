@@ -1,89 +1,13 @@
 <script type="text/javascript">
 	$(function(){
-		$(".company_nav ul li a").eq(0).addClass("on");
+		$(".company_nav ul li a").eq(5).addClass("on");
 	})
 </script>
-
 <div class="company_backg">
 	<div class="company_main">
-		<div class="company_profile">
-			<div class="profile_left">
-				<p><b>公司简介</b></p>
-				<div class="profile_content" style="max-height: 200px; overflow: hidden;">{$desc}</div>
-				<a class="profile_a" href="{url:/site/company_desc/id/$user_id}">查看更多>></a>
-			</div>
-			<div class="profile_right">
-				<img src="{webroot:$img}" onerror="this.src='{$img}'" style="width: 360px; height: 247px;">
-			</div>
-			<div class="clear"></div>
-		</div>
-		<!-- 装修案例 显示六个-->
+		
+		<!-- 业主评论-->
 		<div class="case_list">
-			<div class="case_title">
-				<span class="case_name">装修案例</span>
-				<a class="case_gd" href="{url:/site/company_case/id/$user_id}">+查看更多</a>
-			</div>
-			<div class="case_content">
-				<ul class="case_ul1 clear">
-                    {query:name=case where=user_id eq $user_id limit=6}
-					<li>
-						<a class="case_ul1_a" href="{url:/site/company_case_detail/id/$user_id/cid/$item['id']}">
-							<img src="{webroot:$item['photo']}" style="width: 374px;height: 270px;">
-							<p class="goods_name">{$item['title']}</p>
-							<p class="goods_pro">
-                                {if:$item['style']}
-								<span>             
-                                    {set:$db = new IModel('case_style');$list = $db->query('id in ('.$item['style'].')', 'name');}
-                                    {if:$list}
-                                    {foreach:items=$list item=$style}
-                                        {$style['name']}&nbsp;
-                                    {/foreach}
-                                    {/if}
-                                </span>&nbsp;&nbsp;|&nbsp;
-                                {/if}
-								<span>面积{$item['house_size']}㎡</span>&nbsp;&nbsp;|&nbsp;
-								<span>{$item['price']}万</span>
-								<span class="time">{$item['time']}</span>
-							</p>
-						</a>
-					</li>
-                    {/query}
-				</ul>
-			</div>
-		</div>
-		<!-- 装修案例 end -->
-		<!-- 设计师 显示六个-->
-		<div class="case_list">
-			<div class="case_title">
-				<span class="case_name">设计师</span>
-				<a class="case_gd" href="{url:/site/company_designer/id/$user_id}">+查看更多</a>
-			</div>
-			<div class="case_content">
-				<ul class="case_ul2 clear">
-                    {query:name=designer where=user_id eq $user_id fields=name,num,photo limit=6}
-					<li>
-						<a class="case_ul2_a" href="javascript:;">
-							<div class="design_img">
-								<img src="{webroot:$item['photo']}">
-								<div class="case_num">
-									<div class="design_bag"></div>
-									<div class="design_num">
-										<p>设计</p>
-										<p>{$item['num']}&nbsp;套</p>
-									</div>
-								</div>
-							</div>
-							<p class="designe_name">{$item['name']}</p>
-							<p class="designe_pro">首席设计师</p>
-						</a>
-					</li>
-                    {/query}
-				</ul>
-			</div>
-		</div>
-		<!-- 设计师 end -->
-		<!-- 业主评论 显示三个-->
-		<!-- <div class="case_list">
 			<div class="case_title">
 				<span class="case_name">业主评论</span>
 				<a class="case_gd">+查看更多</a>
@@ -162,122 +86,10 @@
 				</div>
 				<div class="comm_more"><a>查看更多</a></div>
 			</div>
-			<div class="company_suser_pj">
-				<form>
-				<p class="wypj">我要评价</p>
-				<div class="star_box">
-					<strong class="items">设计水平：</strong>
-					<ul class="review_uls">
-						<li class="on"></li>
-						<li class="on"></li>
-						<li class="on"></li>
-						<li class="on"></li>
-						<li class="on"></li>
-					</ul>
-				</div>
-				<div class="clear"></div>
-				<div class="star_box">
-					<strong class="items">服务态度：</strong>
-					<ul class="review_uls">
-						<li class="on"></li>
-						<li class="on"></li>
-						<li class="on"></li>
-						<li class="on"></li>
-						<li class="on"></li>
-					</ul>
-				</div>
-				<div class="clear"></div>
-				<div class="star_box">
-					<strong class="items">施工质量：</strong>
-					<ul class="review_uls">
-						<li class="on"></li>
-						<li class="on"></li>
-						<li class="on"></li>
-						<li class="on"></li>
-						<li class="on"></li>
-					</ul>
-				</div>
-				<div class="clear"></div>
-				<div class="reply_textarea">
-					<textarea placeholder="输入您的评价内容..."></textarea>
-				</div>
-				<div class="file_img clear">
-					<div id="thumbnails"></div>
-					<label id="uploadButton" class="file_an"><input type="file"  accept=".jpg,.png,.bmp"  accept="image/*" name="filesmul[]" multiple="multiple" onchange="filechange(this)"></label>
-				</div>
-				<p class="a99">最多上传5张图片，单张图片不超过10MB,尺寸不小于300*300px,支持jpg,png和bmp.</p>
-				<div><input class="sub_company" type="submit" value="提交"/></div>
-				</form>
-			</div>
-		</div> -->
+		</div>
 	</div>
 </div>
-<!-- 预约装修弹窗 -->
-			<div id="mask">&nbsp;</div>
-			<div id="order">
-				<div class="order_head">预约装修</div>
-				<div style="padding:0 100px;">
-				
-				<form method="post" id="yuyueForm" action="{url:/ucenter/yuyue}" auto_submit>
-
-
-					<input type="text" name='name' datatype="*" errormsg="请输入业主姓名" nullmsg="请输入业主姓名" placeholder="您的姓名" class="normal"><span></span>
-					<input type="text" name="phone" placeholder="电话号码" class="normal" datatype="mobile"nullmsg="请输入手机号" errormsg="请正确填写手机号"><span></span>
-					<input type="text" name="address" placeholder="地址" class="normal" datatype="*"><span></span>
-					<input type="text" name="square" placeholder="房屋面积" class="normal" datatype="n"nullmsg="请填写房屋面积"><span></span><span class="area">㎡</span>
-					
-					<input type="submit" name="submit" class="need_publish" id="mask_close" value="免费发布">
-				</form>
-				</div>
-			</div>
-<!-- 预约装修 end -->
 <script type="text/javascript">
-				// 预约提交
-				$('#yuyueForm').on('submit', function (e){
-					e . preventDefault();
-						$.ajax( {
-							type : "POST",
-							dataType: "json",
-							url : '{url:/ucenter/yuyue}',
-							data : $(this) . serialize(),
-							success : function (res) {
-								console . log(res)
-								if (res . success == '1') {
-									alert(res . info);
-								} else {
-								if (res . success == "0") {
-									alert(res . info);
-								}
-							}
-						}
-					});
-				});
-
-$(function(){
-	// 预约装修点击弹窗
-				$(".nav_icon").click(function(){
-					$("#order").show();
-					$("#order").css("top","20%");
-					$("#mask").show();
-				});
-				$("#mask").click(function(){
-					$("#order").hide();
-					$("#mask").hide();
-				});
-
-	// 切换星星
-	$(".star_box .review_uls ").on('click', 'li', function(){
-		var t = $(this),i = t.index()+1;
-		$(this).parent(".review_uls").find("li").each(function(index){
-			if (index<i) {
-				$(this).addClass('on');
-			}else{
-				$(this).removeClass('on');
-			}
-		});
-	});
-
-})
  function filechange(obj) {
         if (obj.files && obj.files.length) {
             for (var i = 0; i < obj.files.length; i++) {

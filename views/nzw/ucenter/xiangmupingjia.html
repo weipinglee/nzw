@@ -1,0 +1,132 @@
+
+
+
+<section class="uc_table">
+	<table>
+		<tbody>
+			<div class="company_suser_pj">
+				<form>
+				<p class="wypj">我要评价</p>
+				<div class="star_box">
+					<strong class="items">设计水平：</strong>
+					<ul class="review_uls">
+						<li class="on"></li>
+						<li class="on"></li>
+						<li class="on"></li>
+						<li class="on"></li>
+						<li class="on"></li>
+					</ul>
+				</div>
+				<div class="clear"></div>
+				<div class="star_box">
+					<strong class="items">服务态度：</strong>
+					<ul class="review_uls">
+						<li class="on"></li>
+						<li class="on"></li>
+						<li class="on"></li>
+						<li class="on"></li>
+						<li class="on"></li>
+					</ul>
+				</div>
+				<div class="clear"></div>
+				<div class="star_box">
+					<strong class="items">施工质量：</strong>
+					<ul class="review_uls">
+						<li class="on"></li>
+						<li class="on"></li>
+						<li class="on"></li>
+						<li class="on"></li>
+						<li class="on"></li>
+					</ul>
+				</div>
+				<div class="clear"></div>
+				<div class="reply_textarea">
+					<textarea placeholder="输入您的评价内容..."></textarea>
+				</div>
+				<div class="file_img clear">
+					<div id="thumbnails"></div>
+					<label id="uploadButton" class="file_an"><input type="file"  accept=".jpg,.png,.bmp"  accept="image/*" name="filesmul[]" multiple="multiple" onchange="filechange(this)"></label>
+				</div>
+				<p class="a99">最多上传5张图片，单张图片不超过10MB,尺寸不小于300*300px,支持jpg,png和bmp.</p>
+				<div><input class="sub_company" type="submit" value="提交"/></div>
+				</form>
+			</div>
+		</tbody>
+	</table>
+</section>
+
+<script type="text/javascript">
+ function filechange(obj) {
+        if (obj.files && obj.files.length) {
+            for (var i = 0; i < obj.files.length; i++) {
+                var fileName = obj.files[i].name
+                    ,ext = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length).toLowerCase()
+                  var fileSize =  obj.files[i].size;
+	            if(fileSize>1024000){
+	                alert("亲，图片不能超过10MB哦！");
+	                return;
+                }
+                if(ext != "jpg" && ext != "png" && ext != "bmp")
+                {
+                    alert('您上传的图片格式不正确，请重新选择！');
+                    return;
+                }
+
+                $('form[name=comment]').append('<input type="file" name="filesmul[]" value="'+obj.files[i].name+'"');
+                appendImg(window.URL.createObjectURL(obj.files[i]));
+            }
+        } else {
+            obj.select();
+            obj.blur();
+            var imgSrc = document.selection.createRange().text;
+            appendImg(imgSrc, true);
+        }
+
+    }
+    function appendImg(url, ie) {
+        var img = document.createElement('img'), imgid = guid();;
+        img.src = url;
+        img.id = imgid;
+        img.setAttribute("name", "img_name");
+       // document.getElementById("thumbnails").appendChild(img);
+        img.onload = function(){ //加载图片后才能获取图片的宽高
+       var img_length=document.getElementsByName("img_name").length+1
+        var width = img.width;
+        var height = img.height;
+        if(width>=300 && height>=300){
+        	//alert(img_length);
+            if(img_length>5){
+                 alert("亲不能超过五张啊");
+                 return;
+             }else{
+               document.getElementById("thumbnails").appendChild(img);
+             }
+        }else if(width<300){
+            alert("亲图片不能小于300*300哦！");
+            return;
+        }
+    };
+
+        if (ie) {
+            try {
+                var imgshow = document.getElementById(imgid);
+                imgshow.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                imgshow.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = url;
+            } catch (e) {
+                alert("您上传的图片格式不正确，请重新选择！");
+                return false;
+            }
+        }
+
+    }
+
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+</script>
+{$queryEvaluationList->getPageBar()}

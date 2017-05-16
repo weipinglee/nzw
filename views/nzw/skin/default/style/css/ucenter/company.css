@@ -1,0 +1,232 @@
+
+/*装修公司首页*/
+
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+body,form,div,ul,ol,li,h1,h2,h3,h4,h5,h6,table,tr,th,td,p,input,dl,dt,dd,ul,ol,li,input,textarea { font-family:"微软雅黑"!important;}
+
+ul, ol, menu { list-style: none; text-align: left; }
+
+fieldset, img { border: none; }
+
+img, object, select, input, textarea, button { vertical-align: middle; box-sizing: content-box; }
+
+input, textarea, select, address, caption, cite, code, dfn, em, i, b, strong, small, th, var, abbr, button, u, s, del { font-style: normal; text-decoration: none; }
+
+article, aside, footer, header, hgroup, nav, section, figure, figcaption { display: block; }
+
+code, kbd, pre, samp, tt { font-family: Consolas,"Courier New", Courier, monospace; }
+
+address, cite, dfn, em, var, i { font-style: normal; }
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after { content: ""; content: none; }
+
+a { text-decoration: none; cursor: pointer; color: #666; }
+a:hover, a:focus { outline: none; color: #6bb945; text-decoration: underline; }
+a, a * { cursor: pointer; }
+
+body{
+	font-size: 14px;
+	color: #555;
+}
+.clear{clear:both;}
+/*常用字体颜色*/
+.ab6{color: #6bb945;}
+
+
+/*翻页*/
+.pages_bar { margin: 20px; text-align: center; color: #555; }
+.pages_bar a, .pages_bar span {color: #8c8a8b; background: #f5f5f5; display: inline-block; border: 1px #e5e5e5 solid; margin: 0 3px; padding: 5px 8px; text-align: center;}
+.pages_bar a.current_page { border: 1px solid #6bb945; background: #6bb945; color: #fff; }
+.pages_bar span { color: #999; }
+
+/*业主评价*/
+.comment_top ul{
+	margin: 20px 30px 0;
+	background: #f8f8f8;
+	height: 76px;
+	padding: 20px;
+}
+.comment_top ul.case_ul3 li{
+	float: left;
+	text-align: center;
+	width: 25%;
+}
+ul.case_ul3 li .comment_pertage{
+	font-size: 30px;
+	padding-top:10px 
+}
+ul.case_ul3 li .comment_pertage .bg_da{color: #6bb945;}
+ul.case_ul3 li .comm_name{
+	font-size: 16px;
+	color: #999;
+	padding-top:10px 
+}
+.a99{
+	color: #999;
+}
+.a66{
+	color: #666;
+}
+.case_content .user_comment{
+	margin: 30px 35px 0px;
+	border-bottom: 1px solid #e4e4e4;
+	padding-bottom: 20px;
+}
+.case_content .user_comment .user_comm_img{
+	float: left;
+}
+.case_content .user_comment .user_comm_img img{
+	width: 40px;
+	height: 40px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+.case_content .user_content{
+	width: 1070px;float: left;
+	padding-left: 15px;
+}
+.case_content  .comm_user_name{
+	height: 50px;line-height: 45px;
+}
+
+.case_content  .comm_user_name li{
+	float: left;
+	padding-right:20px; color: #666;
+}
+.case_content  .comm_user_name li:nth-child(3){
+	padding-left: 150px;
+} 
+.case_content  .comm_user_name li.star_box{
+	position: relative;
+	top:8px;
+}
+.case_content  .comm_user_name li.star_box .good_star{
+	display: block;height: 25px;background: url("../../../image/company/pj_strat.png") center 0px;position: absolute;z-index: 10;
+}
+.case_content  .comm_user_name li.star_box .bad_star{
+	width: 134px;display: block;height: 25px;background: url("../../../image/company/pj_strat.png") center 26px;position: absolute;z-index: 9;
+}
+.case_content  .comm_user_name li.star_box .good_star.star_3{
+	width: 73px;
+}
+.case_content .user_content .commpany_reply{
+	background: #f8f8f8;
+	border: 1px solid #e4e4e4;
+	padding: 15px;
+}
+.case_content .user_content .commpany_reply p{
+	line-height: 25px;
+}
+.case_content .user_content  .company_comm_img{
+
+}
+.case_content .user_content  .company_comm_img img{
+	float: left;
+	width: 189px;
+	height: 120px;
+	padding:20px 25px 0px 0px;
+}
+.case_content .user_content .comm_user_cont{
+	line-height: 25px;color: #333;
+}
+.case_content .user_content .comm_time{
+	line-height: 50px;color: #999;
+}
+.case_content .comm_more{
+	text-align: center;
+}
+.case_content .comm_more a {
+	display: block;
+	width: 200px;
+	height: 50px;
+	line-height: 50px;
+    border: 1px solid #4d9a28;
+    color: #4d9a28;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    text-decoration: none;
+    margin: 20px auto 20px;
+
+}
+.case_comment{
+	border-bottom: 1px solid #e4e4e4;
+}
+.company_suser_pj{
+	padding:20px 30px;
+}
+.company_suser_pj .wypj{
+	color: #4d9a28;
+	font-size: 18px;
+	padding: 0px 0 20px;
+}
+.company_suser_pj .star_box{
+	padding-left: 5px;
+	position: relative;
+}
+.company_suser_pj .review_uls{
+	float: left;
+}
+.company_suser_pj .review_uls li {
+    width: 25px;
+    height: 25px;
+    background: url("../../../image/company/pj_strat.png") center 25px;
+    float: left;
+}
+.company_suser_pj  .review_uls li.on {
+    background-position: 0 -1px;
+}
+.company_suser_pj .star_box .items{
+	color: #333;
+}
+.company_suser_pj .reply_textarea {
+	padding: 20px 0 10px;
+}
+.company_suser_pj .reply_textarea textarea{
+	border: 1px solid #e4e4e4;
+	width: 1098px;
+	height: 80px;
+	overflow: hidden;
+	padding: 20px;
+}
+.company_suser_pj  .sub_company{
+	width: 120px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #fff;
+	background: #4d9a28;
+	border: 0;
+	border-radius: 5px;
+	outline:none;
+	margin:30px 0 20px;
+}
+.file_img{
+	margin-bottom: 20px;
+}
+.file_img .file_an{
+	display: block;
+	float: left;
+	width: 88px;
+	height: 88px;
+	border: 1px solid #e4e4e4;
+	background: url("../../../image/company/up_img.png") no-repeat center;
+}
+.file_img .file_an input{
+	display: none;
+}
+.file_img #thumbnails{
+	float: left;
+
+}
+.file_img #thumbnails img{
+	float: left;
+	width: 90px;
+	height: 90px;
+	margin-right:20px; 
+}
