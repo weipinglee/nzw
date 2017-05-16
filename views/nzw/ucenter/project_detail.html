@@ -75,7 +75,7 @@
             <th>装修公司联系人：</th>
             <td>{$this->detail['contacts_name']}</td>
         </tr>
-        {else:}
+        {/if}
         <tr>
             <th>操作</th>
             <td>
@@ -83,12 +83,12 @@
                  <input type="button" class="goback_btn" name="oper" value="进入下一阶段" >
                 {/if}
                 {if:$this->user['type']==1 && ($detail['status']==60 || $detail['status']==70)}
-                <input type="button" class="goback_btn" name="oper" value="评价" >
+                <a href="{url:/ucenter/pingjia/id/$detail['id']}"><input type="button" class="goback_btn"  value="评价" ></a>
                 {/if}
-                <input type="button" class="goback_btn" value="返 回" onclick='event_link("{url:/ucenter/project_ist}")'>
+                <input type="button" class="goback_btn" value="返 回" onclick='event_link("{url:/ucenter/project_list}")'>
             </td>
         </tr>
-        {/if}
+
 
     </table>
 </section>
