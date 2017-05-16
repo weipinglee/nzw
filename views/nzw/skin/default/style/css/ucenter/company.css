@@ -1,37 +1,6 @@
-
+		
 /*装修公司首页*/
 
-
-table { border-collapse: collapse; border-spacing: 0; }
-
-body,form,div,ul,ol,li,h1,h2,h3,h4,h5,h6,table,tr,th,td,p,input,dl,dt,dd,ul,ol,li,input,textarea { font-family:"微软雅黑"!important;}
-
-ul, ol, menu { list-style: none; text-align: left; }
-
-fieldset, img { border: none; }
-
-img, object, select, input, textarea, button { vertical-align: middle; box-sizing: content-box; }
-
-input, textarea, select, address, caption, cite, code, dfn, em, i, b, strong, small, th, var, abbr, button, u, s, del { font-style: normal; text-decoration: none; }
-
-article, aside, footer, header, hgroup, nav, section, figure, figcaption { display: block; }
-
-code, kbd, pre, samp, tt { font-family: Consolas,"Courier New", Courier, monospace; }
-
-address, cite, dfn, em, var, i { font-style: normal; }
-
-blockquote, q { quotes: none; }
-
-blockquote:before, blockquote:after, q:before, q:after { content: ""; content: none; }
-
-a { text-decoration: none; cursor: pointer; color: #666; }
-a:hover, a:focus { outline: none; color: #6bb945; text-decoration: underline; }
-a, a * { cursor: pointer; }
-
-body{
-	font-size: 14px;
-	color: #555;
-}
 .clear{clear:both;}
 /*常用字体颜色*/
 .ab6{color: #6bb945;}
@@ -189,7 +158,7 @@ ul.case_ul3 li .comm_name{
 }
 .company_suser_pj .reply_textarea textarea{
 	border: 1px solid #e4e4e4;
-	width: 1098px;
+	width: 855px;
 	height: 80px;
 	overflow: hidden;
 	padding: 20px;
