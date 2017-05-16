@@ -1260,6 +1260,50 @@ class Site extends IController
 		$this->redirect('company_project_list');
 
 	}
+
+	function company_pingjia_list(){
+		$this->layout = 'shop_detail';
+		$id = IFilter::act(IReq::get('id'),'int');
+		$page = IFilter::act(IReq::get('page'),'int');
+		if(!$page)$page = 1;
+		$db = new IModel('user as u,company as c');
+		$dataRow = $db->getObj('u.id = c.user_id and c.is_del = 0 and c.is_lock = 0 and u.id = '.$id, 'u.head_ico,c.user_id,c.true_name,c.address');
+		if(!$dataRow)
+		{
+			IError::show('参数错误','403');
+			return;
+		}
+		$this->setRenderData($dataRow);
+
+		//获取评价数据
+		$pingjiaData = array();
+		$queryObj = new IQuery('yuyue_pingjia as pj');
+		$haoping = '(4,5)';
+		$zhongping = '(3)';
+		$chaping = '(1,2)';
+		$queryObj->join = 'left join yuyue as y on pj.yuyue_id=y.id';
+		$queryObj->where = 'y.company_id ='.$id.' and pj.sheji in '.$haoping.' and pj.shigong in '.$haoping.' and pj.fuwu in '.$haoping;
+		$queryObj->fields = 'count(pj.id)';
+		$pingjiaData['haopingnum'] = $queryObj->find()[0]['count(pj.id)'];
+
+		$queryObj->where = 'y.company_id ='.$id.' and pj.sheji in '.$zhongping.' and pj.shigong in '.$zhongping.' and pj.fuwu in '.$zhongping;
+		$pingjiaData['zhongpingnum'] = $queryObj->find()[0]['count(pj.id)'];
+
+		$queryObj->where = 'y.company_id ='.$id.' and pj.sheji in '.$chaping.' and pj.shigong in '.$chaping.' and pj.fuwu in '.$chaping;
+		$pingjiaData['chapingnum'] = $queryObj->find()[0]['count(pj.id)'];
+		$pingjiaData['haorate'] = 100*$pingjiaData['haopingnum'] / ($pingjiaData['haopingnum']+$pingjiaData['zhongpingnum']+$pingjiaData['chapingnum']);
+
+		//获取评价列表
+		$queryObj->join = 'left join yuyue as y on pj.yuyue_id=y.id left join user as u on y.user_id = u.id';
+		$queryObj->where = 'y.company_id ='.$id;
+		$queryObj->page = $page;
+		$queryObj->fields = 'pj.*,u.username,u.head_ico';
+
+		$this->list = $queryObj->find();
+		$this->pageBar = $queryObj->getPageBar();
+		$this->pingjiaData = $pingjiaData;
+		$this->redirect('company_pingjia_list');
+	}
       
     //设计师界面
     function design_index()

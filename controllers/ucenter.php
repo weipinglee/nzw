@@ -2114,14 +2114,14 @@ class Ucenter extends IController implements userAuthorization
 
 
     //提交项目评价
-    public function project_pingjia(){
+    public function pingjia_submit(){
         $id = IFilter::act(IReq::get('proid','post'),'int');
         if($id){
             $data = array(
                 'sheji' => IFilter::act(IReq::get('sheji','post'),'int'),
                 'fuwu'  => IFilter::act(IReq::get('fuwu','post'),'int'),
                 'shigong' => IFilter::act(IReq::get('shigong','post'),'int'),
-                'content' => IFilter::act(IReq::get('content','post'),'int'),
+                'content' => IFilter::act(IReq::get('content','post')),
                 'yuyue_id'=> $id,
                 'time'    => ITime::getDateTime()
             );
