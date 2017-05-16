@@ -293,3 +293,18 @@ function mathDiv(arg1,arg2)
         return (r1/r2)*pow(10,t2-t1);
     }
 }
+
+$(function(){
+	// 切换星星
+	$(".star_box .review_uls ").on('click', 'li', function(){
+		var t = $(this),i = t.index()+1;
+		$(this).parent(".review_uls").find("li").each(function(index){
+			if (index<i) {
+				$(this).addClass('on');
+			}else{
+				$(this).removeClass('on');
+			}
+		});
+	});
+
+})

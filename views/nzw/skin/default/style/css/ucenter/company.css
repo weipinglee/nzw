@@ -127,7 +127,7 @@ ul.case_ul3 li .comm_name{
 	border-bottom: 1px solid #e4e4e4;
 }
 .company_suser_pj{
-	padding:20px 30px;
+	padding:0 30px;
 }
 .company_suser_pj .wypj{
 	color: #4d9a28;
@@ -177,6 +177,7 @@ ul.case_ul3 li .comm_name{
 }
 .file_img{
 	margin-bottom: 20px;
+	display: inline-block;
 }
 .file_img .file_an{
 	display: block;
