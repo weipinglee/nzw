@@ -129,5 +129,13 @@ abstract class yuyueHandle extends yuyue
         return null;
     }
 
+    public function pingjia(array $update){
+        if($this->check()){
+            return $this->stateObj->pingjia($update);
+        }
+        return null;
+
+    }
+
 
 }

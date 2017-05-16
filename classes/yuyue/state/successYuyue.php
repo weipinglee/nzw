@@ -28,4 +28,8 @@ class successYuyue extends \yuyue\yuyue
     {
         return $this->setStatus(self::SHUIDIAN);
     }
+
+    public function pingjia(array $update){
+
+    }
 }

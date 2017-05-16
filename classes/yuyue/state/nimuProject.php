@@ -29,4 +29,8 @@ class nimuProject extends \yuyue\yuyue
     {
         return $this->setStatus(self::YOUQI);
     }
+
+    public function pingjia(array $update){
+
+    }
 }

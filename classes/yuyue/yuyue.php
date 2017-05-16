@@ -81,5 +81,10 @@ abstract class yuyue{
      */
     abstract public function setnextStep();
 
+    /**
+     * 生成评价
+     */
+    abstract public function pingjia(array $update);
+
 
 }

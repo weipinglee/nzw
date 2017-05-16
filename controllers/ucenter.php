@@ -2113,6 +2113,35 @@ class Ucenter extends IController implements userAuthorization
     }
 
 
+    //提交项目评价
+    public function project_pingjia()
+    {
+        $id = IFilter::act(IReq::get('proid', 'post'), 'int');
+        if ($id) {
+            $data = array(
+                'sheji' => IFilter::act(IReq::get('sheji', 'post'), 'int'),
+                'fuwu' => IFilter::act(IReq::get('fuwu', 'post'), 'int'),
+                'shigong' => IFilter::act(IReq::get('shigong', 'post'), 'int'),
+                'content' => IFilter::act(IReq::get('content', 'post'), 'int'),
+                'yuyue_id' => $id,
+                'time' => ITime::getDateTime()
+            );
+
+            if ($this->user['type'] == 1) {
+                $yuyueHandle = new \yuyue\yuyueHandleUser($id, $this->user['user_id']);
+                if ($yuyueHandle->pingjia($data)) {
+                    die(JSON::encode(Api::getSuccInfo()));
+                } else {
+                    die(JSON::encode(Api::getSuccInfo(0, '评价失败')));
+                }
+            }
+        }
+        die(JSON::encode(Api::getSuccInfo(0, '评价失败')));
+    }
+
+    
+
+
 
 
 }

@@ -29,4 +29,8 @@ class failYuyue extends \yuyue\yuyue
     {
         // TODO: Implement setnextStep() method.
     }
+
+    public function pingjia(array $update){
+
+    }
 }

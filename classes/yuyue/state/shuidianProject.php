@@ -29,4 +29,8 @@ class shuidianProject extends \yuyue\yuyue
     {
        return $this->setStatus(self::NIMU);
     }
+
+    public function pingjia(array $update){
+
+    }
 }
