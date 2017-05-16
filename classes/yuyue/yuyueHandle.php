@@ -42,7 +42,7 @@ abstract class yuyueHandle extends yuyue
     }
 
     //获取装修项目列表
-    public function getProjectList($page=1){}
+    public function getProjectList($page=1,$type='all'){}
     /**
      *  设置获取当前状态的状态类
      * @param $id int 预约id
@@ -127,6 +127,14 @@ abstract class yuyueHandle extends yuyue
             return $this->stateObj->setnextStep();
         }
         return null;
+    }
+
+    public function pingjia(array $update){
+        if($this->check()){
+            return $this->stateObj->pingjia($update);
+        }
+        return null;
+
     }
 
 

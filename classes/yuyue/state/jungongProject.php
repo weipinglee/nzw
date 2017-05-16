@@ -29,4 +29,13 @@ class jungongProject extends \yuyue\yuyue
     {
         return $this->setStatus(self::ZHONGYAN);
     }
+
+    public function pingjia(array $update){
+        $pingObj = new \IModel('yuyue_pingjia');
+        if($pingObj->getObj('yuyue_id='.$update['yuyue_id'])){//评价过不允许再评价
+            return false;
+        }
+        $pingObj->setData($update);
+        return $pingObj->add();
+    }
 }

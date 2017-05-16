@@ -29,4 +29,8 @@ class youqiProject extends \yuyue\yuyue
     {
         return $this->setStatus(self::JUNGONG);
     }
+
+    public function pingjia(array $update){
+
+    }
 }

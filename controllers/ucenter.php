@@ -1912,11 +1912,13 @@ class Ucenter extends IController implements userAuthorization
                 'phone'=>IFilter::act(IReq::get('phone','post')),
                 'address'=>IFilter::act(IReq::get('address','post')),
                 'square'=>IFilter::act(IReq::get('square','post'),'float'),
-                'time'=> ITime::getDateTime()
+                'time'=> ITime::getDateTime(),
+
             );
 
             $M = new IModel('yuyue');
-            if($M->setData($data)->add()){
+            $M->setData($data);
+            if($M->add()){
                 die(JSON::encode(array('success'=>1,'info'=>'预约成功，等待处理')));
             }
             else{
@@ -2017,18 +2019,35 @@ class Ucenter extends IController implements userAuthorization
             'block'=> IFilter::act(IReq::get('block','post')),
             'plan' => IFilter::act(IReq::get('plan','post')),
             'price'=> IFilter::act(IReq::get('price','post')),
-            'description'=> IFilter::act(IReq::get('description','post'))
+            'description'=> IFilter::act(IReq::get('description','post')),
+            'proname' => IFilter::act(IReq::get('proname','post')),
+            'style' => IFilter::act(IReq::get('style','post'))
         );
+
+        if(isset($_FILES['propic']['name']) && $_FILES['propic']['name'] != '')
+        {
+            $photoObj = new PhotoUpload();
+            $photo    = $photoObj->run();
+
+            if($photo['propic']['img'])
+            {
+               $update['img'] = $photo['propic']['img'];
+            }
+
+        }
+
 
         $yuyu_id = IFilter::act(IReq::get('yuyueID','post'),'int');
         if($this->user['type']==2){
             $handleObj = new \yuyue\yuyueHandleCompany($yuyu_id,$this->user['user_id']);
             $res = $handleObj->HandleSuccess($update);
             if($res){
-                die(JSON::encode(array('success'=>1,'info'=>'操作成功')));
+               // die(JSON::encode(array('success'=>1,'info'=>'操作成功')));
+                $this->redirect('/ucenter/project_detail/id/'.$yuyu_id);
             }
         }
-        die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
+        $this->redirect('/ucenter/project_detail/id/'.$yuyu_id);
+       // die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
 
     }
 
@@ -2092,6 +2111,40 @@ class Ucenter extends IController implements userAuthorization
             die(JSON::encode(array('success'=>0,'info'=>'操作失败')));
         }
     }
+
+
+    //提交项目评价
+    public function project_pingjia(){
+        $id = IFilter::act(IReq::get('proid','post'),'int');
+        if($id){
+            $data = array(
+                'sheji' => IFilter::act(IReq::get('sheji','post'),'int'),
+                'fuwu'  => IFilter::act(IReq::get('fuwu','post'),'int'),
+                'shigong' => IFilter::act(IReq::get('shigong','post'),'int'),
+                'content' => IFilter::act(IReq::get('content','post'),'int'),
+                'yuyue_id'=> $id,
+                'time'    => ITime::getDateTime()
+            );
+
+            if($this->user['type']==1){
+                $yuyueHandle = new \yuyue\yuyueHandleUser($id,$this->user['user_id']);
+               if( $yuyueHandle->pingjia($data)){
+                   die(JSON::encode(Api::getSuccInfo()));
+               }
+                else{
+                    die(JSON::encode(Api::getSuccInfo(0,'评价失败')));
+                }
+            }
+        }
+        die(JSON::encode(Api::getSuccInfo(0,'评价失败')));
+    }
+
+    public function pingjia(){
+        $this->redirect('pingjia');
+    }
+
+
+
 
 
 }

@@ -7,6 +7,12 @@
     <table>
 
         <tr>
+            <th>项目名称：</th>
+            <td>
+                {$detail['proname']}
+            </td>
+        </tr>
+        <tr>
             <th>项目状态：</th>
             <td>
                {$detail['statusText']}
@@ -28,6 +34,12 @@
         <tr>
             <th>房屋面积：</th>
             <td>{$detail['square']}</td>
+        </tr>
+        <tr>
+            <th>装修风格：</th>
+            <td>
+                {$detail['style']}
+            </td>
         </tr>
         <tr>
             <th>预约时间：</th>
@@ -67,8 +79,11 @@
         <tr>
             <th>操作</th>
             <td>
-                {if:$this->user['type']==2}
+                {if:$this->user['type']==2 && $detail['status']<70}
                  <input type="button" class="goback_btn" name="oper" value="进入下一阶段" >
+                {/if}
+                {if:$this->user['type']==1 && ($detail['status']==60 || $detail['status']==70)}
+                <input type="button" class="goback_btn" name="oper" value="评价" >
                 {/if}
                 <input type="button" class="goback_btn" value="返 回" onclick='event_link("{url:/ucenter/project_ist}")'>
             </td>

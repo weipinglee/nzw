@@ -13,14 +13,14 @@ namespace yuyue;
 abstract class yuyue{
 
     const INIT = 0;//预约初始
-    const FAIL = 2;//预约失败
-    const SUCCESS = 1; //预约成功,生成订单
+    const FAIL = 20;//预约失败
+    const SUCCESS = 10; //预约成功,生成订单
 
-    const SHUIDIAN = 3;//水电阶段
-    const NIMU    = 4;//泥木阶段
-    const YOUQI   = 5;//油漆阶段
-    const JUNGONG = 6;//竣工阶段
-    const ZHONGYAN = 7;//终验合格
+    const SHUIDIAN = 30;//水电阶段
+    const NIMU    = 40;//泥木阶段
+    const YOUQI   = 50;//油漆阶段
+    const JUNGONG = 60;//竣工阶段
+    const ZHONGYAN = 70;//终验合格
 
     protected $table = 'yuyue';//相关表
     protected $staField = 'status';//状态字段
@@ -42,13 +42,13 @@ abstract class yuyue{
     public function getStatusArray(){
         return array(
             0 => '预约中',
-            1 => '预约成功',
-            2 => '预约失败',
-            3 => '水电阶段',
-            4 => '泥木阶段',
-            5 => '油漆阶段',
-            6 => '竣工阶段',
-            7 => '终验结束',
+            10 => '预约成功',
+            20 => '预约失败',
+            30 => '水电阶段',
+            40 => '泥木阶段',
+            50 => '油漆阶段',
+            60 => '竣工阶段',
+            70 => '终验结束',
         );
     }
 
@@ -80,6 +80,11 @@ abstract class yuyue{
      * @return mixed
      */
     abstract public function setnextStep();
+
+    /**
+     * 生成评价
+     */
+    abstract public function pingjia(array $update);
 
 
 }

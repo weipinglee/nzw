@@ -1222,11 +1222,16 @@ class Site extends IController
 		$id = IFilter::act(IReq::get('id'),'int');
 		$page = IFilter::act(IReq::get('page'),'int');
 		if(!$page)$page = 1;
+
+		$type=IFilter::act(IReq::get('type','get'));
+		if(!$type)
+			$type='all';
 		$this->projectList = array();
 		if($id){
 			$obj = new \yuyue\yuyueHandleCompany(0,$id);
-			$this->projectList = $obj->getProjectList($page);
+			$this->projectList = $obj->getProjectList($page,$type);
 		}
+
 
 		$db = new IModel('user as u,company as c');
 		$dataRow = $db->getObj('u.id = c.user_id and c.is_del = 0 and c.is_lock = 0 and u.id = '.$id, 'u.head_ico,c.user_id,c.true_name,c.address');
@@ -1237,8 +1242,9 @@ class Site extends IController
 		}
 		$this->setRenderData($dataRow);
 				
-			$this->redirect('company_project_list');
-		}
+		$this->redirect('company_project_list');
+
+	}
       
     //设计师界面
     function design_index()

@@ -40,13 +40,13 @@ namespace yuyue;
          return array();
      }
 
-     public function getProjectList($page=1)
+     public function getProjectList($page=1,$type='all')
      {
          $Q = new \IQuery('yuyue as y');
          $Q->join = "left join company as c on y.company_id = c.user_id";
-         $Q->fields = "y.isproject=1 and y.*,c.contacts_name,c.true_name";
+         $Q->fields = " y.*,c.contacts_name,c.true_name";
          $Q->page = $page;
-         $Q->where = 'y.user_id='.$this->operUserId;
+         $Q->where = 'y.isproject=1 and y.user_id='.$this->operUserId;
          $data = $Q->find();
          $pageBar = $Q->getPageBar();
          return array($data,$pageBar);

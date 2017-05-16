@@ -23,7 +23,7 @@
 						<em>案例：<span>{echo:statistics::caseCount($item['user_id'])}</span>套&nbsp;&nbsp;|&nbsp;&nbsp;设计师：<span>{echo:statistics::designerCount($item['user_id'])}</span>名&nbsp;&nbsp;|&nbsp;&nbsp;签单数：<span>0</span>单&nbsp;&nbsp;|&nbsp;&nbsp;咨询人数：<span>0</span>条</em>
 						<p>地址：{$item['address']}</p>
 						<!-- <del>￥{$item['market_price']}</del> -->
-						<a class="shop_list_btn1 nav_icon" >预约装修</a>
+						<a class="shop_list_btn1 nav_icon" name="{$item['user_id']}">预约装修</a>
 						<!-- <a href="" target="_blank" class="shop_list_btn2">免费报价</a> -->
 					</div>
 					<div class="shop_comment">
@@ -50,7 +50,7 @@
 				<div style="padding-left:100px;">
 
 					<form method="post" id="yuyueForm" action="{url:/ucenter/yuyue}" auto_submit>
-						<input type="hidden" name="company_id" value="{$item['user_id']}">
+						<input type="hidden" name="company_id" value="">
 						<input type="text" name="name" datatype="*" errormsg="请输入业主姓名" nullmsg="请输入业主姓名" placeholder="您的姓名" class="normal"><span></span>
 						<input type="text" name="phone" placeholder="电话号码" class="normal" datatype="mobile" nullmsg="请输入手机号" errormsg="请正确填写手机号"><span></span>
 						<input type="text" name="address" placeholder="地址" class="normal" datatype="*" nullmsg="请输入房屋地址" errormsg="请输入房屋地址"><span></span>			
@@ -123,31 +123,12 @@
 			<a href class="need_publish">免费发布</a>
 		</nav> -->
 		<script>
-			// 预约提交
-				$('#yuyueForm').on('submit', function (e){
-					e . preventDefault();
-						$.ajax( {
-							type : "POST",
-							dataType: "json",
-							url : '{url:/ucenter/yuyue}',
-							data : $(this) . serialize(),
-							success : function (res) {
-								console . log(res)
-								if (res . success == '1') {
-									alert(res . info);
-								} else {
-								if (res . success == "0") {
-									alert(res . info);
-								}
-							}
-						}
-					});
-				});
-
 			$(function(){
 
 				// 预约装修点击弹窗
 				$(".nav_icon").click(function(){
+					var company_id = $(this).attr('name');
+					$('input[name=company_id]').val(company_id);
 					$("#order").show();
 					$("#order").css("top","20%");
 					$("#mask").show();

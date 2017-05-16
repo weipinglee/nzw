@@ -39,11 +39,21 @@ namespace yuyue;
          return array();
      }
 
-     public function getProjectList($page=1)
+     public function getProjectList($page=1,$type='all')
      {
          $Q = new \IQuery('yuyue as y');
          $Q->page = $page;
-         $Q->where = 'y.isproject=1 and y.company_id='.$this->operUserId;
+
+         if($type=='ed'){
+             $where = ' and y.status >=60';
+         }
+         elseif($type=='ing'){
+             $where = ' and y.status < 60';
+         }
+         else{
+             $where = '';
+         }
+         $Q->where = 'y.isproject=1 and y.company_id='.$this->operUserId.$where;
          $data = $Q->find();
          $pageBar = $Q->getPageBar();
          return array($data,$pageBar);

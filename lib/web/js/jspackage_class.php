@@ -32,6 +32,12 @@ class IJSPackage
 			),
 			'css'=> 'validform/validate/error.css'
 		),
+		'ajaxupload' => array(
+			'js' => array(
+				'ajaxupload/ajaxfileupload.js',
+					'ajaxupload/upload.js'
+			),
+		),
 		'layer'    => array(
 			'js' => array(
 				'layer/layer.js',

@@ -6,7 +6,7 @@
 	<table>
 		<thead>
 			<tr>
-				<th>姓名</th><th>联系方式</th><th>面积</th><th>地址</th><th>装修公司</th><th>预约时间</th><th>状态</th>
+				<th>姓名</th><th>联系方式</th><th>面积</th><th>地址</th><th>装修公司</th><th>预约时间</th><th>状态</th><th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,12 +21,13 @@
 			<td>
 				{if:$item['status']==0}
 				<b class="orange">预约中</b>
-				{elseif:$item['status']==1}
-				<b class="green">预约成功</b>
-				{else:}
+				{elseif:$item['status']==20}
 				<b class="orange">已取消预约</b>
+				{else:}
+				<b class="green">预约成功</b>
 				{/if}
 			</td>
+			<td><a href="{url:/ucenter/yuyue_detail/id/$item['id']}">查看</a></td>
 		</tr>
 		{/foreach}
 		</tbody>
