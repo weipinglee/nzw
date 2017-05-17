@@ -1328,4 +1328,9 @@ class Site extends IController
         $this->redirect('design_bbs');
     }
 
+	function test(){
+		$this->layout = '';
+		$this->redirect('test');
+	}
+
 }
