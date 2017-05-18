@@ -25,6 +25,7 @@ class lang_base extends tag_base
         '/foreach'=> 'slash',
         '/for'    => 'slash',
         '/while'  => 'slash',
+        '/query'  => 'slash',
 
 
     );

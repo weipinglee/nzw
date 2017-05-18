@@ -26,7 +26,6 @@
 
      public function init()
      {
-         print_r(self::$tagClasses);
         foreach(self::$tagClasses as $item){
             if(!isset(self::$tagObjArr[$item]) ){
                 self::$tagObjArr[$item] = new $item();
