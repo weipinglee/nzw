@@ -13,6 +13,7 @@ class _initData extends pluginBase
 	{
 		plugin::reg("onCreateController",$this,"webSiteConfig");
 		plugin::reg("onCreateView",$this,"themeConfig");
+		plugin::reg("onCreateView",$this,"tagClass");
 		plugin::reg("onFinishView",$this,"jsGlobal");
 	}
 
@@ -27,6 +28,15 @@ class _initData extends pluginBase
 	public function themeConfig()
 	{
 
+	}
+
+	//加载自定义的标签解析类
+	public function tagClass(){
+		$config   = new Config('site_config');
+		if($config->tag_lib){
+			$tag = new tag_base();
+			$tag->addTagClass($config->tag_lib);
+		}
 	}
 
 	//初始化js全局变量

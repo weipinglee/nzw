@@ -1,40 +1,69 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2017/5/17 0017
- * Time: 下午 3:13
+ * @copyright (c) nainaiwang.com
+ * @file tag_base.php
+ * @brief 标签解析基类
+ * @author weipinglee
+ * @date 2017-05-18
+ * @version 1.0
  */
 
  class tag_base
 {
 
      //解析对象数组
-     protected static $tagClasses = array(
+      protected static $tagClasses = array(
          'lang_base',
-         'html_base'
+         'html_base',
 
      );
-     private static $tagObjArr = array();
-     public function __construct()
-     {
 
+     public  function addTagClass($array=array()){
+         self::$tagClasses = array_merge(self::$tagClasses,$array);
+     }
+     private static $tagObjArr = array();
+
+     public function init()
+     {
+         print_r(self::$tagClasses);
+        foreach(self::$tagClasses as $item){
+            if(!isset(self::$tagObjArr[$item]) ){
+                self::$tagObjArr[$item] = new $item();
+            }
+
+        }
      }
 
+
+     /**
+      * 解析字符串 匹配的标签包括：$、/英文字母（如：/if)、英文字母(如if、foreach)
+      * @param $str string  要解析的字符串
+      * @return mixed
+      */
      public function translate($str){
         return  preg_replace_callback('/{(\$|\/[a-zA-Z]+|[a-zA-Z]+)\s*(:?)([^}]*)}/i', array($this,'resolve'), $str);
 
      }
 
+     /**
+      * 对正则匹配的数组解析
+      * @param $matches
+      * @return mixed
+      */
      protected function resolve($matches){
+         //如果标签类数据为空，进行初始化
+         if(empty(self::$tagObjArr)){
+             $this->init();
+         }
         foreach(self::$tagClasses as $item){
-            if(array_key_exists($matches[1],$item::$tagNameParse))
+            if(array_key_exists($matches[1],$item::$tagNameParse))//如果匹配的标签在标签类的转换数组中，进行转换标签，比如将$转为dollars
                 $matches[1] = $item::$tagNameParse[$matches[1]];
+            //如果在该标签类中存在这个标签方法，调用标签类该方法解析
             if(method_exists($item,'_'.$matches[1])){
-                $obj = new $item();
+                $obj = self::$tagObjArr[$item];
                $res = call_user_func_array(array($obj,'_'.$matches[1]),array($matches[3]));
-                if(false === $res)
+                if(false === $res)//如果返回false,则返回原字符串
                     return $matches[0];
                 return $res;
             }

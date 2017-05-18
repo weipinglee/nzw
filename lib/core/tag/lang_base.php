@@ -1,14 +1,19 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2017/5/17 0017
- * Time: 下午 3:09
+ * @copyright (c) nainaiwang.com
+ * @file lang_base.php
+ * @brief php语言基础标签解析类
+ * @author weipinglee
+ * @date 2017-05-18
+ * @version 1.0
  */
+
 
 class lang_base extends tag_base
 {
+
+
 
     //对特殊字符标签名转成字母函数
     public static $tagNameParse = array(
