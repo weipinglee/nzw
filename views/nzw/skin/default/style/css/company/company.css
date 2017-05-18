@@ -464,13 +464,25 @@ ul.case_ul3 li .comm_name{
 	top:8px;
 }
 .case_content  .comm_user_name li.star_box .good_star{
-	display: block;height: 25px;background: url("../../../image/company/pj_strat.png") center 0px;position: absolute;z-index: 10;
+	display: block;height: 25px;background: url("../../../image/company/pj_strat.png") 0px 0px repeat-x;position: absolute;z-index: 10;
 }
 .case_content  .comm_user_name li.star_box .bad_star{
-	width: 134px;display: block;height: 25px;background: url("../../../image/company/pj_strat.png") center 26px;position: absolute;z-index: 9;
+	width: 80px;display: block;height: 25px;background: url("../../../image/company/pj_strat.png") 0 26px ;position: absolute;z-index: 9;
+}
+.case_content  .comm_user_name li.star_box .good_star.star_1{
+	width: 17px;
+}
+.case_content  .comm_user_name li.star_box .good_star.star_2{
+	width: 32px;
 }
 .case_content  .comm_user_name li.star_box .good_star.star_3{
-	width: 73px;
+	width: 48px;
+}
+.case_content  .comm_user_name li.star_box .good_star.star_4{
+	width: 65px;
+}
+.case_content  .comm_user_name li.star_box .good_star.star_5{
+	width: 80px;
 }
 .case_content .user_content .commpany_reply{
 	background: #f8f8f8;
