@@ -65,8 +65,8 @@
         foreach(self::$tagClasses as $item){
 
             $matches[1] = rtrim($matches[1],':');
-            $matches[1] = rtrim($matches[1]);echo $matches[1];
-            $matches[1] = preg_replace_callback('/\s*/','_',$matches[1]);
+            $matches[1] = rtrim($matches[1]);
+            $matches[1] = preg_replace('/\s+/','_',$matches[1]);
             //如果匹配的标签在标签类的转换数组中，进行转换标签，比如将$转为dollars
             if(array_key_exists($matches[1],$item::$tagNameParse))
                 $matches[1] = $item::$tagNameParse[$matches[1]];
