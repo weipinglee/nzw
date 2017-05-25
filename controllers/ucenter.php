@@ -1644,7 +1644,7 @@ class Ucenter extends IController implements userAuthorization
     {
         $_mobile = IFilter::act(IReq::get('phone'));
         $captcha = IFilter::act(IReq::get('captcha'));
-        $_safeName = IReq::get('name') ? IReq::get('name') : 'phoneValidate'.$this->user['type'];
+        $_safeName = IReq::get('name') ? IReq::get('name').$this->user['type'] : 'phoneValidate'.$this->user['type'];
         $_captcha = ISafe::get('captcha');
         $user = new IModel('user');
         if(!$_mobile)
