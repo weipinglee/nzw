@@ -26,6 +26,7 @@ class lang_base extends tag_base
         '/for'    => 'slash',
         '/while'  => 'slash',
         '/query'  => 'slash',
+        'else_if' => 'elseif',
 
 
     );

@@ -41,7 +41,7 @@
       * @return mixed
       */
      public function translate($str){
-        return  preg_replace_callback('/{(\$|\/[a-zA-Z]+|[a-zA-Z]+)\s*(:?)([^}]*)}/i', array($this,'resolve'), $str);
+        return  preg_replace_callback('/{(\$|\/[a-zA-Z]+|[a-zA-Z\s]+)\s*(:?)([^}]*)}/i', array($this,'resolve'), $str);
 
      }
 
@@ -56,7 +56,11 @@
              $this->init();
          }
         foreach(self::$tagClasses as $item){
-            if(array_key_exists($matches[1],$item::$tagNameParse))//如果匹配的标签在标签类的转换数组中，进行转换标签，比如将$转为dollars
+            //去除首尾空格，将标签字符中间的空格替换成一个下划线
+            $matches[1] = trim($matches[1]);
+            $matches[1] = preg_replace('/\s+/','_',$matches[1]);
+            //如果匹配的标签在标签类的转换数组中，进行转换标签，比如将$转为dollars
+            if(array_key_exists($matches[1],$item::$tagNameParse))
                 $matches[1] = $item::$tagNameParse[$matches[1]];
             //如果在该标签类中存在这个标签方法，调用标签类该方法解析
             if(method_exists($item,'_'.$matches[1])){
