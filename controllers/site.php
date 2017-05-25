@@ -1291,7 +1291,14 @@ class Site extends IController
 
 		$queryObj->where = 'y.company_id ='.$id.' and pj.sheji in '.$chaping.' and pj.shigong in '.$chaping.' and pj.fuwu in '.$chaping;
 		$pingjiaData['chapingnum'] = $queryObj->find()[0]['count(pj.id)'];
-		$pingjiaData['haorate'] = 100*$pingjiaData['haopingnum'] / ($pingjiaData['haopingnum']+$pingjiaData['zhongpingnum']+$pingjiaData['chapingnum']);
+		$pingjiaNum = $pingjiaData['haopingnum']+$pingjiaData['zhongpingnum']+$pingjiaData['chapingnum'];
+		if($pingjiaNum!=0){
+			$pingjiaData['haorate'] = 100*$pingjiaData['haopingnum'] / $pingjiaNum;
+		}
+		else{
+			$pingjiaData['haorate'] = 100;
+		}
+
 
 		//获取评价列表
 		$queryObj->join = 'left join yuyue as y on pj.yuyue_id=y.id left join user as u on y.user_id = u.id';
@@ -1327,5 +1334,10 @@ class Site extends IController
         $this->layout = 'design_top';
         $this->redirect('design_bbs');
     }
+
+	function test(){
+		$this->layout = '';
+		$this->redirect('test');
+	}
 
 }

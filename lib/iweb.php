@@ -187,6 +187,9 @@ class IWeb
         'IMemCache'         =>  'core/cache/memcache_class.php',
 		'IInterceptor'		=>	'core/interceptor_class.php',
 		'GD'                =>	'core/util/phpthumb/GD.php',
+		'tag_base'	            =>  'core/tag/tag_base.php',
+		'html_base'         =>  'core/tag/html_base.php',
+		'lang_base'         =>  'core/tag/lang_base.php',
 	);
 }
 
