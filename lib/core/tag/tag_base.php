@@ -34,6 +34,13 @@
         }
      }
 
+     //定义匹配模式
+     protected $pregType = array(
+         '/{(\$)([^}]*)}/i',
+         '/{(\/[a-zA-Z]+)([^}]*)}/i',
+         '/{([a-zA-Z]+[a-zA-Z\s]*\s*:)\s*([^}]*)}/i'
+     );
+
 
      /**
       * 解析字符串 匹配的标签包括：$、/英文字母（如：/if)、英文字母(如if、foreach)
@@ -41,7 +48,7 @@
       * @return mixed
       */
      public function translate($str){
-        return  preg_replace_callback('/{(\$|\/[a-zA-Z]+|[a-zA-Z\s]+)\s*(:?)([^}]*)}/i', array($this,'resolve'), $str);
+        return  preg_replace_callback($this->pregType, array($this,'resolve'), $str);
 
      }
 
@@ -56,16 +63,17 @@
              $this->init();
          }
         foreach(self::$tagClasses as $item){
-            //去除首尾空格，将标签字符中间的空格替换成一个下划线
-            $matches[1] = trim($matches[1]);
-            $matches[1] = preg_replace('/\s+/','_',$matches[1]);
+
+            $matches[1] = rtrim($matches[1],':');
+            $matches[1] = rtrim($matches[1]);echo $matches[1];
+            $matches[1] = preg_replace_callback('/\s*/','_',$matches[1]);
             //如果匹配的标签在标签类的转换数组中，进行转换标签，比如将$转为dollars
             if(array_key_exists($matches[1],$item::$tagNameParse))
                 $matches[1] = $item::$tagNameParse[$matches[1]];
             //如果在该标签类中存在这个标签方法，调用标签类该方法解析
             if(method_exists($item,'_'.$matches[1])){
                 $obj = self::$tagObjArr[$item];
-               $res = call_user_func_array(array($obj,'_'.$matches[1]),array($matches[3]));
+               $res = call_user_func_array(array($obj,'_'.$matches[1]),array($matches[2]));
                 if(false === $res)//如果返回false,则返回原字符串
                     return $matches[0];
                 return $res;
