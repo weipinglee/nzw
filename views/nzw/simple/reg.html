@@ -64,9 +64,26 @@
 					</div> 
 
 <!-- 装修公司 -->
+<style type="text/css">
+	.reg_content div input[type="radio"]{text-indent: 1em;
+position: relative;
+right: 0;
+height: auto;
+line-height: 42px;
+border: none;
+margin:-5px 5px 0 20px;
+width: auto;
+border: none;
+vertical-align: middle;
+outline: none;
+box-shadow: none;}
+</style>
 					<div class="reg_content company" style="display:none;">
 						<form action='{url:/simple/reg_act}' method='post'>
                             <input type="hidden" name="t" value="2">	
+                            <div style="border:0;">
+                            	<input type="radio" checked name="company">装修公司<input type="radio" name="company">建材商
+                            </div>
                             <div>
                                 <label for="true_name">公司名称：</label>
                                 <input class="input_text text first" type="text" name='true_name' pattern="required" alt="请填写公司名称" placeholder="请输入公司名称">
