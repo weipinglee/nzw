@@ -45,14 +45,14 @@
 			<!--普通正常-->
 			{if:$promo == ''}
 				{if:$group_price}
-				<li>会员价：<em class="price">￥<span id="data_groupPrice">{$group_price}</span></em></li>
-				<li>原售价：￥<del id="data_sellPrice">{$sell_price}</del></li>
+				<li>会员价：<em class="price">￥<span id="data_groupPrice">{$group_price}<span class="Tax" style="font-size:12px;">(含税)</span></span></em></li>
+				<li>原售价：￥<del id="data_sellPrice">{$sell_price}<span class="Tax">(含税)</span></del></li>
 				{else:}
-				<li>销售价：<em class="price">￥<span id="data_sellPrice">{$sell_price}</span></em></li>
+				<li>销售价：<em class="price">￥<span id="data_sellPrice">{$sell_price}<span class="Tax" style="font-size:12px;">(含税)</span></span></em></li>
 				{/if}
 			{/if}
 
-			<li>市场价：￥<del id="data_marketPrice">{$market_price}</del></li>
+			<li>市场价：￥<del id="data_marketPrice">{$market_price}<span class="Tax">(含税)</span></del></li>
 
 			<li class="collect">
 				<span class="favorite" onclick="favorite_add_ajax({$id},this);">
@@ -409,7 +409,7 @@
 						</div>
 						<div>
 							<span class="hot_deta">{$item['name']}</span>
-							<em class="hot_price">￥{$item['sell_price']}</em>
+							<em class="hot_price">￥{$item['sell_price']}<span class="Tax" style="display:inline-block;">(含税)</span></em>
 							<i class="sorting">{$k}</i>
 						</div>
 					</a>

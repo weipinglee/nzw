@@ -1019,6 +1019,8 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
 
 .icon-renren:before { content: "\f18b"; }
 
+.Tax{font-size: 12px;color: #aaa;font-weight: normal;}
+
 .header { position: relative; z-index: 999; }
 .header, .header a { color: #fff; -webkit-transition: all 0.25s ease-in-out; transition: all 0.25s ease-in-out; }
 .header .top_line .welcome a:first-child, .header .top_line .top_tool li:not(:last-child) { display: inline-block; }
